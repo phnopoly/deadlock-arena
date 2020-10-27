@@ -11,6 +11,7 @@ music/
 pics/
 sound/
 bin/
+lib/
 
 ### STS ###
 .apt_generated
