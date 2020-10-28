@@ -3,7 +3,7 @@ package com.deadlockArena.frontEnd.logic;
 import javax.swing.JTextArea;
 
 import com.deadlockArena.Constants;
-import com.deadlockArena.backEnd.entity.Champion;
+import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.frontEnd.graphics.SelectButton;
 
 public class MessageProcessor {
@@ -14,15 +14,15 @@ public class MessageProcessor {
 
 	// move
 	public void generateMessage(JTextArea messages, SelectButton sB, String dir) {
-		messages.append(sB.getChampion() + " moved " + dir + "\n");
+		messages.append(sB.getChampionDto() + " moved " + dir + "\n");
 	}
 
-	public void generateMessage(JTextArea messages, Champion attacker, Champion target) {
+	public void generateMessage(JTextArea messages, ChampionDto attacker, ChampionDto target) {
 		messages.append(attacker + " missed hitting " + target + "\n");
 	}
 
 	// attack
-	public void generateMessage(JTextArea messages, Champion attacker, Champion target,
+	public void generateMessage(JTextArea messages, ChampionDto attacker, ChampionDto target,
 			int [ ] damage, boolean [ ] critical) {
 
 		String damageStr = "";
@@ -49,7 +49,8 @@ public class MessageProcessor {
 	}
 
 	// drink
-	public void generateMessage(JTextArea messages, Champion c, int healed, int total, boolean hp) {
+	public void generateMessage(JTextArea messages, ChampionDto c, int healed, int total,
+			boolean hp) {
 		String hpStr = hp ? "hp" : "mp";
 		messages.append(c + " recovered " + healed + " " + hpStr + ".\n");
 	}

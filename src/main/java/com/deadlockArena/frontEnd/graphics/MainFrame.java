@@ -19,8 +19,8 @@ import javax.swing.JTextArea;
 import com.deadlockArena.Constants;
 import com.deadlockArena.Game;
 import com.deadlockArena.SpringUtils;
-import com.deadlockArena.backEnd.entity.Champion;
 import com.deadlockArena.backEnd.service.ServiceImpl;
+import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.frontEnd.logic.Coordinate;
 import com.deadlockArena.frontEnd.logic.SelectGrid;
 import com.deadlockArena.frontEnd.logic.SlotGrid;
@@ -187,7 +187,7 @@ public class MainFrame extends JFrame {
 		gbc.gridy = 0;
 		for (int i = 0; i < selectGrid.getJButtons().length; i++) {
 			for (int j = 0; j < selectGrid.getJButtons() [ i ].length; j++) {
-				Champion c = serviceImpl.getChampion(Constants.CHAMPIONS [ i ] [ j ]);
+				ChampionDto c = serviceImpl.getChampion(Constants.CHAMPIONS [ i ] [ j ]);
 				SelectButton selectButton = new SelectButton(game, c);
 				selectGrid.setJButton(i, j, selectButton);
 				this.panelWest_a.add(selectButton, gbc);
@@ -220,21 +220,21 @@ public class MainFrame extends JFrame {
 	}
 
 	public void setPanelEast(SlotButton sB, int player) {
-		Champion champion = sB.getChampion();
-		if (champion == null) {
+		ChampionDto championDto = sB.getChampionDto();
+		if (championDto == null) {
 			return;
 		}
 
 		if (player == 2) {
-			this.iconLabel2.setIcon(new ImageIcon("pics/" + sB.getChampion() + "Icon.png"));
-			this.championLabel2.setText(sB.getChampion().toString());
-			this.stats2.setText(Constants.getStatsText(champion));
+			this.iconLabel2.setIcon(new ImageIcon("pics/" + sB.getChampionDto() + "Icon.png"));
+			this.championLabel2.setText(sB.getChampionDto().toString());
+			this.stats2.setText(Constants.getStatsText(championDto));
 			this.hp2.onChampion(sB);
 			this.mp2.onChampion(sB);
 		} else {
-			iconLabel1.setIcon(new ImageIcon("pics/" + sB.getChampion() + "Icon.png"));
-			this.championLabel1.setText(sB.getChampion().toString());
-			this.stats1.setText(Constants.getStatsText(champion));
+			iconLabel1.setIcon(new ImageIcon("pics/" + sB.getChampionDto() + "Icon.png"));
+			this.championLabel1.setText(sB.getChampionDto().toString());
+			this.stats1.setText(Constants.getStatsText(championDto));
 			this.hp1.onChampion(sB);
 			this.mp1.onChampion(sB);
 		}
@@ -313,27 +313,27 @@ public class MainFrame extends JFrame {
 			for (int j = 0; j < Constants.SLOT_COL_COUNT; j++) {
 				SlotButton slotButton1 = grid1.getJButton(i, j);
 				if (slotButton1.getBorder().equals(Constants.MOVE_BORDER)) {
-					if (slotButton1.getChampion() == null) {
+					if (slotButton1.getChampionDto() == null) {
 						slotButton1.alterMouseAdapter0_3();
 					} else {
 						slotButton1.alterMouseAdapter0_2();
 					}
 				} else if (slotButton1.getBorder().equals(Constants.ATTACK_BORDER)) {
 					slotButton1.alterMouseAdapter2_4();
-				} else if (slotButton1.getChampion() != null) {
+				} else if (slotButton1.getChampionDto() != null) {
 					slotButton1.alterMouseAdapter0_2();
 				}
 				// ---------------------------------------------------------------
 				SlotButton slotButton2 = grid2.getJButton(i, j);
 				if (slotButton2.getBorder().equals(Constants.MOVE_BORDER)) {
-					if (slotButton2.getChampion() != null) {
+					if (slotButton2.getChampionDto() != null) {
 						slotButton2.alterMouseAdapter0_2();
 					} else {
 						slotButton2.alterMouseAdapter0_3();
 					}
 				} else if (slotButton2.getBorder().equals(Constants.ATTACK_BORDER)) {
 					slotButton2.alterMouseAdapter2_4();
-				} else if (slotButton2.getChampion() != null) {
+				} else if (slotButton2.getChampionDto() != null) {
 					slotButton2.alterMouseAdapter0_2();
 				}
 			}
@@ -353,11 +353,11 @@ public class MainFrame extends JFrame {
 		}
 	}
 
-	public void displayPreview(Champion champion, ImageIcon imageIcon) {
+	public void displayPreview(ChampionDto championDto, ImageIcon imageIcon) {
 		this.iconLabel.setIcon(imageIcon);
-		this.stats.setText(Constants.getStatsText(champion));
-		this.description.setText(champion.getDescription());
-		this.championLabel.setText(champion.getName());
+		this.stats.setText(Constants.getStatsText(championDto));
+		this.description.setText(championDto.getDescription());
+		this.championLabel.setText(championDto.getName());
 
 	}
 

@@ -6,19 +6,16 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.deadlockArena.backEnd.entity.Champion;
 
 @Repository
-@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 public interface ChampionRepository
-		extends JpaRepository<Champion, String>, JpaSpecificationExecutor<Champion> {
+		extends JpaRepository<Champion, Long>, JpaSpecificationExecutor<Champion> {
 
 	List<Champion> findAll();
 
-	Optional<Champion> findByChampionId(int championId);
+	Optional<Champion> findByChampionId(Long championId);
 
 	Optional<Champion> findByName(String name);
 }

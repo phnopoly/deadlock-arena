@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 
 import com.deadlockArena.Constants;
 import com.deadlockArena.Game;
-import com.deadlockArena.backEnd.entity.Champion;
+import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.frontEnd.logic.SelectGrid;
 
 import lombok.Data;
@@ -26,17 +26,17 @@ public class SelectButton extends JButton {
 	private static final long serialVersionUID = 8876199740027195332L;
 
 	private boolean selected;
-	private Champion champion;
+	private ChampionDto championDto;
 	private Color color;
 	private JLabel championLabel, championPicture;
 	private ImageIcon originalSizeImage, normalImage, grayedImage;
 	private MouseListener mL;
 
-	public SelectButton(Game game, Champion champion) {
+	public SelectButton(Game game, ChampionDto championDto) {
 		super.setFont(Constants.BASIC_FONT);
 		super.setPreferredSize(new Dimension(Constants.PIXEL * 4 / 5, Constants.PIXEL * 4 / 5));
 		this.selected = false;
-		this.champion = champion;
+		this.championDto = championDto;
 
 		this.setGraphics();
 		this.evaluateColorByLogic();
@@ -46,7 +46,7 @@ public class SelectButton extends JButton {
 	private void setGraphics() {
 
 		this.originalSizeImage = new ImageIcon(
-				this.getClass().getClassLoader().getResource(champion.getName() + "Icon.png"));
+				this.getClass().getClassLoader().getResource(championDto.getName() + "Icon.png"));
 		this.normalImage = new ImageIcon(originalSizeImage.getImage()
 				.getScaledInstance(Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH));
 		this.grayedImage = new ImageIcon(GrayFilter.createDisabledImage(normalImage.getImage()));
@@ -56,7 +56,7 @@ public class SelectButton extends JButton {
 		this.championPicture.setBounds(20, 20, Constants.PIXEL / 2, Constants.PIXEL / 2);
 		super.add(championPicture);
 
-		this.championLabel = new JLabel(champion.getName());
+		this.championLabel = new JLabel(championDto.getName());
 		this.championLabel.setForeground(Constants.DEFAULT_BACKGROUND);
 		this.championLabel.setFont(Constants.SELECT_BUTTON_CHAMPION_FONT);
 		this.championLabel.setBounds(5, 5, Constants.PIXEL, 10);
@@ -64,7 +64,7 @@ public class SelectButton extends JButton {
 	}
 
 	private void evaluateColorByLogic() {
-		switch (champion.getLogic()) {
+		switch (championDto.getLogic()) {
 		case 1:
 			this.color = Color.pink;
 			break;
@@ -86,7 +86,7 @@ public class SelectButton extends JButton {
 			public void mousePressed(MouseEvent e) {
 				if (thisButton.isEnabled()) {
 					mainFrame.getAAS().playSound("select");
-					mainFrame.displayPreview(champion, originalSizeImage);
+					mainFrame.displayPreview(championDto, originalSizeImage);
 					selectGrid.disableAll();
 					thisButton.setSelected(true);
 					game.setCurrentSelect(thisButton);
@@ -103,7 +103,7 @@ public class SelectButton extends JButton {
 
 			public void mouseEntered(MouseEvent e) {
 				if (thisButton.isEnabled()) {
-					mainFrame.displayPreview(champion, originalSizeImage);
+					mainFrame.displayPreview(championDto, originalSizeImage);
 					thisButton.setBackground(Color.gray);
 				}
 			}

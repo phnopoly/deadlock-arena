@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import com.deadlockArena.Constants;
-import com.deadlockArena.backEnd.entity.Champion;
+import com.deadlockArena.dto.ChampionDto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class DeadButton extends JButton {
 	static final long serialVersionUID = -1629109863348198757L;
-	private Champion champion;
+	private ChampionDto championDto;
 
 	public DeadButton() {
 		super();
@@ -24,12 +24,12 @@ public class DeadButton extends JButton {
 				.getScaledInstance(Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH);
 		setPreferredSize(new Dimension(Constants.PIXEL / 2, Constants.PIXEL / 2));
 		setIcon(new ImageIcon(newImg));
-		this.champion = null;
+		this.championDto = null;
 	}
 
-	public void insertDead(Champion champion) {
-		this.champion = champion;
-		setIcon(new ImageIcon(new ImageIcon("pics/" + champion + "Icon.png").getImage()
+	public void insertDead(ChampionDto championDto) {
+		this.championDto = championDto;
+		setIcon(new ImageIcon(new ImageIcon("pics/" + championDto + "Icon.png").getImage()
 				.getScaledInstance(Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH)));
 	}
 

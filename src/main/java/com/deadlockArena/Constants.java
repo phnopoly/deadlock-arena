@@ -11,7 +11,7 @@ import javax.swing.border.LineBorder;
 
 import org.springframework.stereotype.Component;
 
-import com.deadlockArena.backEnd.entity.Champion;
+import com.deadlockArena.dto.ChampionDto;
 
 @Component
 public class Constants {
@@ -101,13 +101,14 @@ public class Constants {
 //			+ "Damage: ? - ?<br/>" + "Defense: ?<br/>" + "Critical: ?<br/>" + "Dodge : ?"
 //			+ "</html>";
 
-	public static String getStatsText(Champion champion) {
-		return "<html>" + "<font color=" + champion.evalColor() + ">HP: " + champion.getCurrentHp()
-				+ " / " + champion.getMaxHp() + "</font><br/>" + "MP: " + champion.getCurrentMp()
-				+ " / " + champion.getMaxMp() + "<br/>" + "Damage: " + champion.getMinDmg() + " - "
-				+ champion.getMaxDmg() + "<br/>" + "Defense: " + champion.getDefense() + "<br/>"
-				+ "Critical: " + champion.getCritical() + "%<br/>" + "Dodge: " + champion.getDodge()
-				+ "%" + "</html>";
+	public static String getStatsText(ChampionDto championDto) {
+		return "<html>" + "<font color=" + championDto.evalColor() + ">HP: "
+				+ championDto.getCurrentHp() + " / " + championDto.getMaxHp() + "</font><br/>"
+				+ "MP: " + championDto.getCurrentMp() + " / " + championDto.getMaxMp() + "<br/>"
+				+ "Damage: " + championDto.getMinDmg() + " - " + championDto.getMaxDmg() + "<br/>"
+				+ "Defense: " + championDto.getDefense() + "<br/>" + "Critical: "
+				+ championDto.getCritical() + "%<br/>" + "Dodge: " + championDto.getDodge() + "%"
+				+ "</html>";
 	}
 
 }

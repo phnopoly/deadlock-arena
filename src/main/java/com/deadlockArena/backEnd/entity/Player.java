@@ -7,25 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "PLAYER", schema = "DEADLOCK")
-public class Player extends BaseEntity implements Serializable {
-
+public class Player implements Serializable {
 	private static final long serialVersionUID = -2275053963480092839L;
 
 	@Id
 	@Column(name = "PLAYER_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
+	@SequenceGenerator(name = "SEQ", sequenceName = "PLAYER_SEQ")
 	private Long playerId;
 
 	@NotNull

@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 
 import com.deadlockArena.Constants;
 import com.deadlockArena.Game;
-import com.deadlockArena.backEnd.entity.Champion;
+import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.exception.CornerCaseException;
 import com.deadlockArena.frontEnd.logic.AttackLogic;
 import com.deadlockArena.frontEnd.logic.Coordinate;
@@ -30,7 +30,7 @@ public class SlotButton extends JButton {
 	private static final long serialVersionUID = 1436902681342190255L;
 
 	private boolean selected;
-	private Champion champion;
+	private ChampionDto championDto;
 	private String position;
 	private Coordinate coordinate;
 	private JLabel championLabel, championPicture;
@@ -69,7 +69,7 @@ public class SlotButton extends JButton {
 				if (thisSlot.isEnabled()) {
 					game.getMainFrame().getAAS().playSound("select");
 					thisSlot.setSelected(true);
-					thisSlot.setChampion(currentSelect.getChampion());
+					thisSlot.setChampionDto(currentSelect.getChampionDto());
 					thisSlot.setBackground(currentSelect.getColor());
 
 					mainFrame.getOrderList()
@@ -77,7 +77,7 @@ public class SlotButton extends JButton {
 
 					// TO-DO replace with new path on nexus
 					ImageIcon ic = new ImageIcon(this.getClass().getClassLoader()
-							.getResource(champion.getName() + "Icon.png"));
+							.getResource(championDto.getName() + "Icon.png"));
 					thisSlot.normalImage = new ImageIcon(ic.getImage().getScaledInstance(
 							Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH));
 					thisSlot.grayedImage = new ImageIcon(
@@ -89,7 +89,7 @@ public class SlotButton extends JButton {
 							Constants.PIXEL / 2);
 					thisSlot.add(championPicture);
 
-					thisSlot.championLabel = new JLabel(champion.getName());
+					thisSlot.championLabel = new JLabel(championDto.getName());
 					thisSlot.championLabel.setForeground(Constants.DEFAULT_BACKGROUND);
 					thisSlot.championLabel.setFont(Constants.SELECT_BUTTON_CHAMPION_FONT);
 					thisSlot.championLabel.setBounds(5, 5, Constants.PIXEL, 10);
@@ -142,7 +142,7 @@ public class SlotButton extends JButton {
 		int player = game.getPlayer();
 		StanceLogic stanceLogic = game.getMainLogic().getStanceLogic();
 		AttackLogic attackLogic = game.getMainLogic().getAttackLogic();
-		Champion champ = this.champion;
+		ChampionDto champ = this.championDto;
 		SlotGrid slotGrid = player == 2 ? slotGrid2 : slotGrid1;
 		mL2 = new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -162,7 +162,7 @@ public class SlotButton extends JButton {
 				if (SlotButton.this.isEnabled()) {
 					try {
 						if (slotGrid.getJButton(coordinate.getI(), coordinate.getJ() + 1)
-								.getChampion() == null) {
+								.getChampionDto() == null) {
 							slotGrid.getJButton(coordinate.getI(), coordinate.getJ() + 1)
 									.setBorder(Constants.MOVE_BORDER);
 						}
@@ -170,7 +170,7 @@ public class SlotButton extends JButton {
 						/* Ignore */}
 					try {
 						if (slotGrid.getJButton(coordinate.getI(), coordinate.getJ() - 1)
-								.getChampion() == null) {
+								.getChampionDto() == null) {
 							slotGrid.getJButton(coordinate.getI(), coordinate.getJ() - 1)
 									.setBorder(Constants.MOVE_BORDER);
 						}
@@ -178,7 +178,7 @@ public class SlotButton extends JButton {
 						/* Ignore */}
 					try {
 						if (slotGrid.getJButton(coordinate.getI() + 1, coordinate.getJ())
-								.getChampion() == null) {
+								.getChampionDto() == null) {
 							slotGrid.getJButton(coordinate.getI() + 1, coordinate.getJ())
 									.setBorder(Constants.MOVE_BORDER);
 						}
@@ -186,7 +186,7 @@ public class SlotButton extends JButton {
 						/* Ignore */}
 					try {
 						if (slotGrid.getJButton(coordinate.getI() - 1, coordinate.getJ())
-								.getChampion() == null) {
+								.getChampionDto() == null) {
 							slotGrid.getJButton(coordinate.getI() - 1, coordinate.getJ())
 									.setBorder(Constants.MOVE_BORDER);
 						}
@@ -256,7 +256,7 @@ public class SlotButton extends JButton {
 					mainFrame.getAAS().playSound("select");
 
 					SlotButton.this.setBackground(slot.getBackground());
-					SlotButton.this.setChampion(slot.getChampion());
+					SlotButton.this.setChampionDto(slot.getChampionDto());
 					SlotButton.this.setChampionLabel(slot.getChampionLabel());
 					SlotButton.this.setChampionPicture(slot.getChampionPicture());
 					SlotButton.this.setNormalImage(slot.getNormalImage());
@@ -266,7 +266,7 @@ public class SlotButton extends JButton {
 					slot.setBackground(Constants.DEFAULT_BACKGROUND);
 					slot.setText("");
 					slot.removeAll();
-					slot.setChampion(null);
+					slot.setChampionDto(null);
 					slot.setNormalImage(null);
 					slot.setGrayedImage(null);
 
@@ -381,7 +381,7 @@ public class SlotButton extends JButton {
 	void switchFunctionality() {
 		removeMouseListener(mL1);
 		addMouseListener(mL5);
-		if (champion != null) {
+		if (championDto != null) {
 			addMouseListener(mL2);
 		}
 	}
@@ -423,13 +423,13 @@ public class SlotButton extends JButton {
 	}
 
 	public void setSkillButtons(SlotButton slot, int side, int player) {
-		Champion localchampion = null;
-		if (champion == null) {
+		ChampionDto localchampion = null;
+		if (championDto == null) {
 			return;
-		} else if (slot == null && champion != null || slot != null && side != player) {
-			localchampion = champion;
+		} else if (slot == null && championDto != null || slot != null && side != player) {
+			localchampion = championDto;
 		} else if (slot != null && side == player) {
-			localchampion = slot.getChampion();
+			localchampion = slot.getChampionDto();
 		} else {
 			return;
 		}

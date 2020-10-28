@@ -15,8 +15,8 @@ public class AttackLogic {
 	private List<SlotButton> targets = new ArrayList<>();
 
 	/**
-	 * Any champion on first row. If first row empty, any hero on second row. Can
-	 * never attack third, fourth, or fifth row
+	 * Any ChampionDtoDto on first row. If first row empty, any hero on second row.
+	 * Can never attack third, fourth, or fifth row
 	 * 
 	 * @param targetGrid
 	 */
@@ -25,7 +25,7 @@ public class AttackLogic {
 		for (int i = 3; i >= 0; i--) {
 			if (!targetDetected) {
 				for (int j = 0; j < 5; j++) {
-					if (targetGrid.getJButton(i, j).getChampion() != null) {
+					if (targetGrid.getJButton(i, j).getChampionDto() != null) {
 						targetDetected = true;
 						targets.add(targetGrid.getJButton(i, j));
 					}
@@ -35,14 +35,14 @@ public class AttackLogic {
 	}
 
 	/**
-	 * First champion of any column.
+	 * First ChampionDtoDto of any column.
 	 * 
 	 * @param targetGrid - grid of potential targets
 	 */
 	public void attack2(SlotGrid targetGrid) {
 		for (int j = 0; j < 5; j++) {
 			for (int i = 0; i < 3; i++) {
-				if (targetGrid.getJButton(i, j).getChampion() != null) {
+				if (targetGrid.getJButton(i, j).getChampionDto() != null) {
 					targets.add(targetGrid.getJButton(i, j));
 					break;
 				}
@@ -52,14 +52,14 @@ public class AttackLogic {
 	}
 
 	/**
-	 * Any champion of the entire grid.
+	 * Any ChampionDtoDto of the entire grid.
 	 * 
 	 * @param targetGrid - grid of potential targets
 	 */
 	public void attack3(SlotGrid targetGrid) {
 		for (int i = 0; i < targetGrid.getJButtons().length; i++) {
 			for (int j = 0; j < targetGrid.getJButtons() [ i ].length; j++) {
-				if (targetGrid.getJButton(i, j).getChampion() != null) {
+				if (targetGrid.getJButton(i, j).getChampionDto() != null) {
 					targets.add(targetGrid.getJButton(i, j));
 				}
 			}
@@ -126,7 +126,7 @@ public class AttackLogic {
 			// slot.evenAllListeners();
 			return false;
 		}
-		slot.getChampion().attack(targetButton.getChampion());
+		slot.getChampionDto().attack(targetButton.getChampionDto());
 		return true;
 	}
 

@@ -3,7 +3,7 @@ package com.deadlockArena.frontEnd.logic;
 import java.awt.event.MouseListener;
 
 import com.deadlockArena.Constants;
-import com.deadlockArena.backEnd.entity.Champion;
+import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.exception.CornerCaseException;
 import com.deadlockArena.exception.InstanceMismatchException;
 import com.deadlockArena.frontEnd.graphics.DeadButton;
@@ -37,7 +37,7 @@ public final class SlotGrid extends Grid {
 	public void checkForDeads(DeadButton [ ] deads) throws CornerCaseException {
 		for (int i = 0; i < Constants.SLOT_ROW_COUNT; i++) {
 			for (int j = 0; j < Constants.SLOT_COL_COUNT; j++) {
-				Champion champion = this.getJButton(i, j).getChampion();
+				ChampionDto champion = this.getJButton(i, j).getChampionDto();
 				if (champion == null) {
 					continue;
 				} else if (champion.isDead()) {
@@ -55,17 +55,17 @@ public final class SlotGrid extends Grid {
 	 * @param deads - list of dead champion buttons
 	 */
 	private void transferchampion(SlotButton slotButton, DeadButton [ ] deads) {
-		Champion h = slotButton.getChampion();
+		ChampionDto h = slotButton.getChampionDto();
 
 		for (int i = 0; i < deads.length; i++)
-			if (deads [ i ].getChampion() == null) {
+			if (deads [ i ].getChampionDto() == null) {
 				deads [ i ].insertDead(h);
 				break;
 			}
 
 		slotButton.setBackground(Constants.DEFAULT_BACKGROUND);
 		slotButton.removeAll();
-		slotButton.setChampion(null);
+		slotButton.setChampionDto(null);
 //		slotButton.removeMouseListener(slotButton.getML2());
 //		slotButton.removeMouseListener(slotButton.getML4());
 
@@ -77,10 +77,10 @@ public final class SlotGrid extends Grid {
 	/**
 	 * Get the number of champions on the grid
 	 * 
-	 * @return the number of Champions
+	 * @return the number of ChampionDtos
 	 * @throws InstanceMismatchException
 	 */
-	public int getNumberOfChampions() {
+	public int getNumberOfChampionDtos() {
 		int count = 0;
 		for (int i = 0; i < super.jButtons.length; i++) {
 			for (int j = 0; j < super.jButtons [ i ].length; j++) {

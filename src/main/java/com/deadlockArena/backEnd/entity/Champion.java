@@ -7,24 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.deadlockArena.Constants;
-
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "CHAMPION", schema = "DEADLOCK")
-public class Champion extends BaseEntity implements Serializable {
+public class Champion implements Serializable {
 	private static final long serialVersionUID = 5195526083757043733L;
 
 	@Id
 	@Column(name = "CHAMPION_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
+	@SequenceGenerator(name = "SEQ", sequenceName = "CHAMPION_SEQ")
 	protected String championId;
 
 	@Column(name = "NAME")
@@ -123,110 +121,5 @@ public class Champion extends BaseEntity implements Serializable {
 	protected PotionInventory potionInventory;
 	@Transient
 	protected StatusBox statusBox;
-
-	// TO-DO evaluate the return type
-	public int [ ] drinkPotion(boolean hp) {
-		if (hp) {
-			if (potionInventory.getHpPotions().isEmpty()) {
-				return null;
-			}
-			HpPotion p = potionInventory.getHpPotions().get(0);
-			this.currentHp = currentHp + p.getRecovery() >= maxHp ? maxHp
-					: currentHp + p.getRecovery();
-			potionInventory.getHpPotions().remove(0);
-			return new int [ ] { p.getRecovery() , currentHp };
-		} else {
-			if (potionInventory.getMpPotions().isEmpty()) {
-				return null;
-			}
-			MpPotion p = potionInventory.getMpPotions().get(0);
-			this.currentMp = currentMp + p.getRecovery() >= maxMp ? maxMp
-					: currentMp + p.getRecovery();
-			potionInventory.getHpPotions().remove(0);
-			return new int [ ] { p.getRecovery() , currentMp };
-		}
-	}
-
-	public void attack(Champion target) {
-		int damage = calculateNextDamage();
-
-		boolean dodged = target.isDodgedHit();
-		boolean critical = isCriticalHit();
-
-		int finalDamage;
-		if (!dodged) {
-			finalDamage = damage - target.getDefense();
-			if (critical) {
-				finalDamage *= 2;
-			}
-			if (finalDamage < 0) { // handles negative damages
-				finalDamage = 0;
-			}
-			// TO-DO move somewhere else
-//			target.setCurrentHp(target.getCurrentHp() - finalDamage);
-//			mainFrame.getGrid().checkForDeads(mainFrame);
-//			mainFrame.getAAS().shakeButton(targetButton);
-//			mainFrame.getAAS().playSound("melee");
-//			mainFrame.getMP().generateMove(mainFrame.getMessages(), mainFrame.getMove());
-//			mainFrame.getMP().generateMessage(mainFrame.getMessages(), this, target,
-//					new int [ ] { finalDamage }, new boolean [ ] { critical });
-		} else {
-//			mainFrame.getAAS().playSound("dodge");
-//			mainFrame.getMP().generateMove(mainFrame.getMessages(), mainFrame.getMove());
-//			mainFrame.getMP().generateMessage(mainFrame.getMessages(), this, target);
-		}
-
-	}
-
-	public int calculateNextDamage() {
-		return Constants.RANDOM.nextInt((maxDmg - minDmg) + 1) + minDmg;
-	}
-
-	public boolean isCriticalHit() {
-		return Constants.RANDOM.nextInt(101) < critical;
-	}
-
-	public boolean isDodgedHit() {
-		return Constants.RANDOM.nextInt(101) < dodge;
-	}
-
-	public String evalColor() {
-		if ((double) currentHp / maxHp <= .25) {
-			return "red";
-		} else if ((double) currentHp / maxHp <= .50) {
-			return "yellow";
-		} else {
-			return "white";
-		}
-	}
-
-	public boolean isDead() {
-		if (currentHp < 0) {
-			currentHp = 0;
-		}
-		return currentHp == 0;
-	}
-
-	public double evalFraction(int i) {
-		double frac = 0.0;
-		switch (i) {
-		case 0:
-			frac = (double) currentSkill1CD / skill1CD;
-			break;
-		case 1:
-			frac = (double) currentSkill2CD / skill2CD;
-			break;
-		case 2:
-			frac = (double) currentSkill3CD / skill3CD;
-			break;
-		case 3:
-			frac = (double) currentSkill4CD / skill4CD;
-			break;
-		case 4:
-			frac = (double) currentSkill5CD / skill5CD;
-			break;
-		}
-		return frac;
-	}
 
 }

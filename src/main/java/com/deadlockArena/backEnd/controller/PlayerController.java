@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.deadlockArena.backEnd.entity.Player;
 import com.deadlockArena.backEnd.service.ServiceImpl;
+import com.deadlockArena.dto.PlayerDto;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,7 +28,7 @@ public class PlayerController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully logged in.") ,
 			@ApiResponse(code = 404, message = "Username and Password are not found.") })
 	@GetMapping("/login")
-	public Player getPlayerForLogin(String username, String password) {
+	public PlayerDto getPlayerForLogin(String username, String password) {
 		return serviceImpl.getPlayerForLogin(username, password);
 	}
 
@@ -36,7 +37,7 @@ public class PlayerController {
 			@ApiResponse(code = 200, message = "Successfully retrieved all Players.") ,
 			@ApiResponse(code = 404, message = "No players are present.") })
 	@GetMapping("/allPlayers")
-	public List<Player> getAllPlayers() {
+	public List<PlayerDto> getAllPlayers() {
 		return serviceImpl.getAllPlayers();
 	}
 
@@ -44,7 +45,7 @@ public class PlayerController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully created Player.") ,
 			@ApiResponse(code = 400, message = "Username already exsits.") })
 	@PostMapping("/player")
-	public Player newPlayer(@RequestBody Player Player) {
-		return serviceImpl.newPlayer(Player);
+	public PlayerDto newPlayer(@RequestBody PlayerDto playerDto) {
+		return serviceImpl.newPlayer(playerDto);
 	}
 }

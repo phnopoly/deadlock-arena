@@ -3,17 +3,24 @@ package com.deadlockArena.backEnd.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.deadlockArena.backEnd.entity.Champion;
 import com.deadlockArena.backEnd.entity.Player;
+import com.deadlockArena.backEnd.mapper.ChampionMapper;
+import com.deadlockArena.backEnd.mapper.PlayerMapper;
 import com.deadlockArena.backEnd.repository.ChampionRepository;
 import com.deadlockArena.backEnd.repository.PlayerRepository;
+import com.deadlockArena.dto.ChampionDto;
+import com.deadlockArena.dto.PlayerDto;
 import com.deadlockArena.exception.DeadlockException;
 
 @Component
+@Transactional
 public class ServiceImpl {
 
 	@Autowired
@@ -22,13 +29,17 @@ public class ServiceImpl {
 	@Autowired
 	private PlayerRepository playerRepository;
 
-	public Champion getChampion(String champion) {
+	private static final ChampionMapper CHAMPION_MAPPER = Mappers.getMapper(ChampionMapper.class);
+
+	private static final PlayerMapper PLAYER_MAPPER = Mappers.getMapper(PlayerMapper.class);
+
+	public ChampionDto getChampion(String champion) {
 		champion = champion.trim();
 		champion = champion.substring(0, 1).toUpperCase() + champion.substring(1).toLowerCase();
 		try {
 			Optional<Champion> c = championRepository.findByName(champion);
 			if (c.isPresent()) {
-				return c.get();
+				return CHAMPION_MAPPER.entitiyToDto(c.get());
 			} else {
 				throw new DeadlockException("Cannot find Champion.", HttpStatus.NOT_FOUND);
 			}
@@ -39,11 +50,11 @@ public class ServiceImpl {
 		}
 	}
 
-	public List<Champion> getAllChampions() {
+	public List<ChampionDto> getAllChampions() {
 		try {
 			List<Champion> championList = championRepository.findAll();
 			if (!championList.isEmpty()) {
-				return championList;
+				return CHAMPION_MAPPER.entitiyToDto(championList);
 			} else {
 				throw new DeadlockException("Cannot find any Champions.", HttpStatus.NOT_FOUND);
 			}
@@ -54,11 +65,11 @@ public class ServiceImpl {
 		}
 	}
 
-	public Player getPlayerForLogin(String u, String p) {
+	public PlayerDto getPlayerForLogin(String u, String p) {
 		try {
 			Optional<Player> player = playerRepository.findByUsernameAndPassword(u, p);
 			if (!player.isPresent()) {
-				return player.get();
+				return PLAYER_MAPPER.entitiyToDto(player.get());
 			} else {
 				String msg = "Cannot find player with username and password.";
 				throw new DeadlockException(msg, HttpStatus.NOT_FOUND);
@@ -70,11 +81,11 @@ public class ServiceImpl {
 		}
 	}
 
-	public List<Player> getAllPlayers() {
+	public List<PlayerDto> getAllPlayers() {
 		try {
 			List<Player> playerList = playerRepository.findAll();
 			if (!playerList.isEmpty()) {
-				return playerList;
+				return PLAYER_MAPPER.entitiyToDto(playerList);
 			} else {
 				throw new DeadlockException("Cannot find any Players.", HttpStatus.NOT_FOUND);
 			}
@@ -85,12 +96,21 @@ public class ServiceImpl {
 		}
 	}
 
-	public Player newPlayer(final Player player) {
+	public PlayerDto newPlayer(final PlayerDto playerDto) {
 		try {
-			if (!this.playerRepository.findByUsername(player.getUsername()).isPresent()) {
-				return this.playerRepository.save(player);
-			} else {
+			Optional<Player> p1 = this.playerRepository.findByUsername(playerDto.getUsername());
+			Optional<Player> p2 = this.playerRepository.findByEmail(playerDto.getEmail());
+			if (!p1.isPresent() && !p2.isPresent()) {
+				Player toSavePlayer = PLAYER_MAPPER.dtoToEntity(playerDto);
+				Player savedPlayer = this.playerRepository.save(toSavePlayer);
+				return PLAYER_MAPPER.entitiyToDto(savedPlayer);
+			} else if (!p1.isPresent() && p2.isPresent()) {
+				throw new DeadlockException("Email Already Exists.", HttpStatus.BAD_REQUEST);
+			} else if (p1.isPresent() && !p2.isPresent()) {
 				throw new DeadlockException("Username Already Exists.", HttpStatus.BAD_REQUEST);
+			} else {
+				throw new DeadlockException("Username and Email Already Exists.",
+						HttpStatus.BAD_REQUEST);
 			}
 		} catch (DeadlockException e) {
 			throw e;

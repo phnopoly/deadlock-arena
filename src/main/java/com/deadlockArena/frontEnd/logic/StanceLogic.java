@@ -25,36 +25,36 @@ public class StanceLogic {
 			return true;
 		} else if (coords.getI() == 1) {
 			for (int j = 0; j < 5; j++) {
-				if (thisGrid.getJButton(coords.getI() - 1, j).getChampion() != null) {
+				if (thisGrid.getJButton(coords.getI() - 1, j).getChampionDto() != null) {
 					return false;
 				}
 			}
 			return true;
 		} else if (coords.getI() == 2) {
 			for (int j = 0; j < 5; j++) {
-				if (thisGrid.getJButton(coords.getI() - 1, j).getChampion() != null) {
+				if (thisGrid.getJButton(coords.getI() - 1, j).getChampionDto() != null) {
 					return false;
 				}
 			}
 			for (int j = 0; j < 5; j++) {
-				if (thisGrid.getJButton(coords.getI() - 2, j).getChampion() != null) {
+				if (thisGrid.getJButton(coords.getI() - 2, j).getChampionDto() != null) {
 					return false;
 				}
 			}
 			return true;
 		} else if (coords.getI() == 3) {
 			for (int j = 0; j < 5; j++) {
-				if (thisGrid.getJButton(coords.getI() - 1, j).getChampion() != null) {
+				if (thisGrid.getJButton(coords.getI() - 1, j).getChampionDto() != null) {
 					return false;
 				}
 			}
 			for (int j = 0; j < 5; j++) {
-				if (thisGrid.getJButton(coords.getI() - 2, j).getChampion() != null) {
+				if (thisGrid.getJButton(coords.getI() - 2, j).getChampionDto() != null) {
 					return false;
 				}
 			}
 			for (int j = 0; j < 5; j++) {
-				if (thisGrid.getJButton(coords.getI() - 3, j).getChampion() != null) {
+				if (thisGrid.getJButton(coords.getI() - 3, j).getChampionDto() != null) {
 					return false;
 				}
 			}
@@ -80,7 +80,7 @@ public class StanceLogic {
 		if (coords.getI() == 0)
 			return true;
 		for (int i = 0; i < coords.getI(); i++) {
-			if (thisGrid.getJButton(i, coords.getJ()).getChampion() != null)
+			if (thisGrid.getJButton(i, coords.getJ()).getChampionDto() != null)
 				return false;
 		}
 		return true;

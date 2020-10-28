@@ -4,8 +4,8 @@ import javax.swing.JTextArea;
 
 import com.deadlockArena.Constants;
 import com.deadlockArena.SpringUtils;
-import com.deadlockArena.backEnd.entity.Champion;
 import com.deadlockArena.backEnd.service.ServiceImpl;
+import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.frontEnd.graphics.SlotButton;
 
 import lombok.Data;
@@ -40,13 +40,13 @@ public class MainLogic {
 			for (int j = 0; j < Constants.SLOT_COL_COUNT; j++) {
 				// TO-DO based on player
 				if (player == 2) {
-					if (slotButtons1 [ i ] [ j ].getChampion() != null) {
+					if (slotButtons1 [ i ] [ j ].getChampionDto() != null) {
 						// slotButtons1 [ i ].alterMouseAdapter0_4();
 					}
 					slotButtons2 [ i ] [ j ].setEnabled(false);
 					slotButtons1 [ i ] [ j ].setEnabled(true);
 				} else {
-					if (slotButtons2 [ i ] [ j ].getChampion() != null) {
+					if (slotButtons2 [ i ] [ j ].getChampionDto() != null) {
 						// slotButtons2 [ i ].alterMouseAdapter0_4();
 					}
 					slotButtons2 [ i ] [ j ].setEnabled(true);
@@ -62,8 +62,8 @@ public class MainLogic {
 	public void updateAllCoolDowns(SlotGrid grid) {
 		for (int i = 0; i < grid.getJButtons().length; i++) {
 			for (int j = 0; j < grid.getJButtons() [ i ].length; j++) {
-				if (grid.getJButton(i, j).getChampion() != null) {
-					Champion h = grid.getJButton(i, j).getChampion();
+				if (grid.getJButton(i, j).getChampionDto() != null) {
+					ChampionDto h = grid.getJButton(i, j).getChampionDto();
 					h.setCurrentSkill1CD(h.getCurrentSkill1CD() - 1);
 					h.setCurrentSkill2CD(h.getCurrentSkill2CD() - 1);
 					h.setCurrentSkill3CD(h.getCurrentSkill3CD() - 1);

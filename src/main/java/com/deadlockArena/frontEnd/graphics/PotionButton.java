@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import com.deadlockArena.Constants;
-import com.deadlockArena.backEnd.entity.Champion;
+import com.deadlockArena.dto.ChampionDto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,9 +45,9 @@ public class PotionButton extends JButton {
 		setEnabled(true);
 		this.sB = sB;
 		if (cp)
-			jl.setText("" + sB.getChampion().getPotionInventory().getHpPotions().size());
+			jl.setText("" + sB.getChampionDto().getPotionInventory().getHpPotions().size());
 		else
-			jl.setText("" + sB.getChampion().getPotionInventory().getMpPotions().size());
+			jl.setText("" + sB.getChampionDto().getPotionInventory().getMpPotions().size());
 	}
 
 	public void offchampion() {
@@ -60,8 +60,8 @@ public class PotionButton extends JButton {
 		public void mousePressed(MouseEvent e) {
 			if (PotionButton.this.sB == null)
 				return;
-			Champion c = PotionButton.this.getSB().getChampion();
-			int [ ] info = sB.getChampion().drinkPotion(cp);
+			ChampionDto c = PotionButton.this.getSB().getChampionDto();
+			int [ ] info = sB.getChampionDto().drinkPotion(cp);
 			if (info == null)
 				return;
 			if (cp)
