@@ -1,12 +1,11 @@
 package com.deadlockArena;
 
-import com.deadlockArena.constant.JavaData;
-import com.deadlockArena.graphics.MainFrame;
-import com.deadlockArena.graphics.SelectButton;
-import com.deadlockArena.graphics.SlotButton;
-import com.deadlockArena.logic.MainLogic;
-import com.deadlockArena.logic.SelectGrid;
-import com.deadlockArena.logic.SlotGrid;
+import com.deadlockArena.frontEnd.graphics.MainFrame;
+import com.deadlockArena.frontEnd.graphics.SelectButton;
+import com.deadlockArena.frontEnd.graphics.SlotButton;
+import com.deadlockArena.frontEnd.logic.MainLogic;
+import com.deadlockArena.frontEnd.logic.SelectGrid;
+import com.deadlockArena.frontEnd.logic.SlotGrid;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,11 +33,11 @@ public class Game {
 		this.mainLogic = new MainLogic();
 
 		this.selectGrid = new SelectGrid(
-				new SelectButton [ JavaData.SELECT_ROW_COUNT ] [ JavaData.SELECT_COL_COUNT ]);
+				new SelectButton [ Constants.SELECT_ROW_COUNT ] [ Constants.SELECT_COL_COUNT ]);
 		this.slotGrid1 = new SlotGrid(
-				new SlotButton [ JavaData.SLOT_ROW_COUNT ] [ JavaData.SLOT_COL_COUNT ], "bottom");
+				new SlotButton [ Constants.SLOT_ROW_COUNT ] [ Constants.SLOT_COL_COUNT ], "bottom");
 		this.slotGrid2 = new SlotGrid(
-				new SlotButton [ JavaData.SLOT_ROW_COUNT ] [ JavaData.SLOT_COL_COUNT ], "top");
+				new SlotButton [ Constants.SLOT_ROW_COUNT ] [ Constants.SLOT_COL_COUNT ], "top");
 
 		this.player = 1;
 		this.totalCount = 0;
@@ -78,7 +77,7 @@ public class Game {
 			// mainFrame.getMessages());
 			mainFrame.clearSkillButtons(player);
 			mainFrame.clearPanelEast(player);
-			if (currentCap < JavaData.CAP_TURN) {
+			if (currentCap < Constants.CAP_TURN) {
 				currentCap++;
 			}
 			this.move = 0;
