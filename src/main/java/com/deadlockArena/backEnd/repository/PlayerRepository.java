@@ -9,16 +9,19 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.deadlockArena.backEnd.entity.Champion;
+import com.deadlockArena.backEnd.entity.Player;
 
 @Repository
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-public interface ChampionRepository
-		extends JpaRepository<Champion, String>, JpaSpecificationExecutor<Champion> {
+public interface PlayerRepository
+		extends JpaRepository<Player, String>, JpaSpecificationExecutor<Player> {
 
-	List<Champion> findAll();
+	List<Player> findAll();
 
-	Optional<Champion> findByChampionId(int championId);
+	Optional<Player> findByPlayerId(int playerId);
 
-	Optional<Champion> findByName(String name);
+	Optional<Player> findByUsername(String username);
+
+	Optional<Player> findByUsernameAndPassword(String username, String password);
+
 }

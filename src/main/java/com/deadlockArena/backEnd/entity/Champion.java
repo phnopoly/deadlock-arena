@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -11,16 +13,19 @@ import javax.persistence.Transient;
 import com.deadlockArena.Constants;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "CHAMPION", schema = "DEADLOCK")
-public class Champion implements Serializable {
+public class Champion extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 5195526083757043733L;
 
 	@Id
-	@Column(name = "ID")
-	protected String id;
+	@Column(name = "CHAMPION_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	protected String championId;
 
 	@Column(name = "NAME")
 	protected String name;

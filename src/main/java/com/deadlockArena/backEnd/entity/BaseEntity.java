@@ -1,13 +1,9 @@
 package com.deadlockArena.backEnd.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -47,24 +43,24 @@ public abstract class BaseEntity {
 			@Parameter(name = "initial_value", value = "1") ,
 			@Parameter(name = "increment_size", value = "1") })
 
-	@Id
-	@GeneratedValue(generator = "DeadlockArenaSequenceGenerator")
-	private Long id;
+//	@Id
+//	@GeneratedValue(generator = "DeadlockArenaSequenceGenerator")
+//	private Long id;
 
 	/**
 	 * Manages the version of Entities to measure the amount of modifications made
 	 * to this entity.
 	 */
-	@Version
-	@Column(name = "version")
-	private int version;
+//	@Version
+//	@Column(name = "version")
+//	private int version;
 
 	/**
 	 * Keeps record of when an Entity wss created.
 	 */
 	@CreatedDate
 	@CreationTimestamp
-	private LocalDateTime createdAt;
+	private Date createdAt;
 
 	/**
 	 * Records who updated an Entity by saving username.
@@ -77,7 +73,7 @@ public abstract class BaseEntity {
 	 */
 	@LastModifiedDate
 	@UpdateTimestamp
-	private LocalDateTime updatedAt;
+	private Date updatedAt;
 
 	/**
 	 * Manages the timestamps for each update made to an Entity.
