@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.deadlockArena.backEnd.entity.Champion;
-import com.deadlockArena.backEnd.service.ServiceImpl;
+import com.deadlockArena.backEnd.service.Microservice;
 import com.deadlockArena.dto.ChampionDto;
 
 import io.swagger.annotations.ApiOperation;
@@ -21,14 +21,14 @@ import io.swagger.annotations.ApiResponses;
 public class ChampionController {
 
 	@Autowired
-	private ServiceImpl serviceImpl;
+	private Microservice microservice;
 
 	@ApiOperation(value = "Get champion by name.", response = Champion.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved Champion.") ,
 			@ApiResponse(code = 404, message = "Champion does not exsit.") })
 	@GetMapping("/champion")
 	public ChampionDto getChampion(@RequestParam String champion) {
-		return serviceImpl.getChampion(champion);
+		return microservice.getChampion(champion);
 	}
 
 	@ApiOperation(value = "Get all Champions.", response = Champion.class, responseContainer = "List")
@@ -37,7 +37,7 @@ public class ChampionController {
 			@ApiResponse(code = 404, message = "Champions do not exist.") })
 	@GetMapping("/allChampions")
 	public List<ChampionDto> getAllChampions() {
-		return serviceImpl.getAllChampions();
+		return microservice.getAllChampions();
 	}
 
 }

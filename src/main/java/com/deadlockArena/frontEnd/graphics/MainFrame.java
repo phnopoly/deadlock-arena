@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.Stack;
 
+import javax.annotation.PostConstruct;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,10 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.deadlockArena.Constants;
 import com.deadlockArena.Game;
-import com.deadlockArena.SpringUtils;
-import com.deadlockArena.backEnd.service.ServiceImpl;
+import com.deadlockArena.backEnd.service.Microservice;
 import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.frontEnd.logic.Coordinate;
 import com.deadlockArena.frontEnd.logic.SelectGrid;
@@ -34,7 +36,8 @@ public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = -8478413270802946942L;
 
-	private ServiceImpl serviceImpl;
+	@Autowired
+	private Microservice microservice;
 	private AnimationAndSound aAS;
 
 	private Stack<JButton [ ]> orderList;
@@ -66,6 +69,7 @@ public class MainFrame extends JFrame {
 	private PotionButton hp1, mp1, hp2, mp2;
 
 	public MainFrame() {
+		// this.microservice = SpringUtils.microservice;
 		super.setTitle("Deadlock Arena");
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setLayout(new BorderLayout());
@@ -76,7 +80,6 @@ public class MainFrame extends JFrame {
 
 		this.aAS = new AnimationAndSound();
 		this.orderList = new Stack<>();
-		this.serviceImpl = SpringUtils.serviceImpl;
 	}
 
 	public void addPanels() {
@@ -181,13 +184,15 @@ public class MainFrame extends JFrame {
 		super.add(panelSouth, BorderLayout.SOUTH);
 	}
 
+	@PostConstruct
 	public void addSelectButtons(Game game, SelectGrid selectGrid) throws Exception {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		for (int i = 0; i < selectGrid.getJButtons().length; i++) {
 			for (int j = 0; j < selectGrid.getJButtons() [ i ].length; j++) {
-				ChampionDto c = serviceImpl.getChampion(Constants.CHAMPIONS [ i ] [ j ]);
+				System.out.println(microservice);
+				ChampionDto c = microservice.getChampion(Constants.CHAMPIONS [ i ] [ j ]);
 				SelectButton selectButton = new SelectButton(game, c);
 				selectGrid.setJButton(i, j, selectButton);
 				this.panelWest_a.add(selectButton, gbc);

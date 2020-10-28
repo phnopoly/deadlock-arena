@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.deadlockArena.backEnd.entity.Player;
-import com.deadlockArena.backEnd.service.ServiceImpl;
+import com.deadlockArena.backEnd.service.Microservice;
 import com.deadlockArena.dto.PlayerDto;
 
 import io.swagger.annotations.ApiOperation;
@@ -22,14 +22,14 @@ import io.swagger.annotations.ApiResponses;
 public class PlayerController {
 
 	@Autowired
-	private ServiceImpl serviceImpl;
+	private Microservice microservice;
 
 	@ApiOperation(value = "Retrieve login info.", response = Player.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully logged in.") ,
 			@ApiResponse(code = 404, message = "Username and Password are not found.") })
 	@GetMapping("/login")
 	public PlayerDto getPlayerForLogin(String username, String password) {
-		return serviceImpl.getPlayerForLogin(username, password);
+		return microservice.getPlayerForLogin(username, password);
 	}
 
 	@ApiOperation(value = "Get all Players.", response = Player.class, responseContainer = "List")
@@ -38,7 +38,7 @@ public class PlayerController {
 			@ApiResponse(code = 404, message = "No players are present.") })
 	@GetMapping("/allPlayers")
 	public List<PlayerDto> getAllPlayers() {
-		return serviceImpl.getAllPlayers();
+		return microservice.getAllPlayers();
 	}
 
 	@ApiOperation(value = "Create a new Player.", response = Player.class)
@@ -46,6 +46,6 @@ public class PlayerController {
 			@ApiResponse(code = 400, message = "Username already exsits.") })
 	@PostMapping("/player")
 	public PlayerDto newPlayer(@RequestBody PlayerDto playerDto) {
-		return serviceImpl.newPlayer(playerDto);
+		return microservice.newPlayer(playerDto);
 	}
 }

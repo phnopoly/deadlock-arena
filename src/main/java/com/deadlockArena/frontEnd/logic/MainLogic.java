@@ -3,8 +3,8 @@ package com.deadlockArena.frontEnd.logic;
 import javax.swing.JTextArea;
 
 import com.deadlockArena.Constants;
-import com.deadlockArena.SpringUtils;
-import com.deadlockArena.backEnd.service.ServiceImpl;
+import com.deadlockArena.backEnd.service.Microservice;
+import com.deadlockArena.config.SpringUtils;
 import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.frontEnd.graphics.SlotButton;
 
@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class MainLogic {
 
-	private ServiceImpl serviceImpl;
+	private Microservice microservice;
 
 	private StanceLogic stanceLogic;
 	private AttackLogic attackLogic;
@@ -23,7 +23,7 @@ public class MainLogic {
 		this.stanceLogic = new StanceLogic();
 		this.attackLogic = new AttackLogic();
 		this.messageProcessor = new MessageProcessor();
-		this.serviceImpl = SpringUtils.serviceImpl;
+		this.microservice = SpringUtils.microservice;
 	}
 
 //	public void populateSlotButtons(Game game, SlotGrid slotGrid) {

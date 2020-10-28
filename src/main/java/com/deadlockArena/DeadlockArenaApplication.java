@@ -13,7 +13,7 @@ public class DeadlockArenaApplication implements CommandLineRunner {
 
 	public static final Logger LOG = LoggerFactory.getLogger(DeadlockArenaApplication.class);
 
-	private static final boolean RUN_APP = false;
+	private static final boolean RUN_APP = true;
 
 	@Override
 	public void run(String... arg) throws Exception {
