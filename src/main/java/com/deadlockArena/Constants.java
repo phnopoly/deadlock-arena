@@ -73,7 +73,7 @@ public class Constants {
 	public static final int SELECT_COL_COUNT = 3;
 	public static final int SELECT_COUNT = SELECT_ROW_COUNT * SELECT_COL_COUNT;
 
-	public static final int SLOT_ROW_COUNT = 4;
+	public static final int SLOT_ROW_COUNT = 1;
 	public static final int SLOT_COL_COUNT = 5;
 	public static final int SLOT_COUNT = SLOT_ROW_COUNT * SLOT_COL_COUNT;
 

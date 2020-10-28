@@ -16,12 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.deadlockArena.Constants;
 import com.deadlockArena.Game;
-import com.deadlockArena.backEnd.service.Microservice;
-import com.deadlockArena.config.SpringUtils;
 import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.frontEnd.logic.Coordinate;
 import com.deadlockArena.frontEnd.logic.SelectGrid;
@@ -36,8 +32,8 @@ public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = -8478413270802946942L;
 
-	@Autowired
-	private Microservice microservice;
+//	@Autowired
+//	private Microservice microservice;
 	private AnimationAndSound aAS;
 
 	private Stack<JButton [ ]> orderList;
@@ -69,9 +65,9 @@ public class MainFrame extends JFrame {
 	private PotionButton hp1, mp1, hp2, mp2;
 
 	public MainFrame() {
-		this.microservice = SpringUtils.microservice;
-		System.out.println(SpringUtils.microservice);
-		System.out.println(this.microservice);
+//		this.microservice = SpringUtils.microservice;
+//		System.out.println(SpringUtils.microservice);
+//		System.out.println(this.microservice);
 
 		super.setTitle("Deadlock Arena");
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -193,9 +189,9 @@ public class MainFrame extends JFrame {
 		gbc.gridy = 0;
 		for (int i = 0; i < selectGrid.getJButtons().length; i++) {
 			for (int j = 0; j < selectGrid.getJButtons() [ i ].length; j++) {
-				System.out.println(microservice);
-				ChampionDto c = microservice.getChampion(Constants.CHAMPIONS [ i ] [ j ]);
-				SelectButton selectButton = new SelectButton(game, c);
+//				System.out.println(microservice);
+//				ChampionDto c = microservice.getChampion(Constants.CHAMPIONS [ i ] [ j ]);
+				SelectButton selectButton = new SelectButton(game, new ChampionDto());
 				selectGrid.setJButton(i, j, selectButton);
 				this.panelWest_a.add(selectButton, gbc);
 				gbc.gridx++;

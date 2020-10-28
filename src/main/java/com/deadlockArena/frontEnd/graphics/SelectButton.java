@@ -36,7 +36,7 @@ public class SelectButton extends JButton {
 		super.setFont(Constants.BASIC_FONT);
 		super.setPreferredSize(new Dimension(Constants.PIXEL * 4 / 5, Constants.PIXEL * 4 / 5));
 		this.selected = false;
-		this.championDto = championDto;
+		// this.championDto = championDto;
 
 		this.setGraphics();
 		this.evaluateColorByLogic();
