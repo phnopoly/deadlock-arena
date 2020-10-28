@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.Stack;
 
-import javax.annotation.PostConstruct;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.deadlockArena.Constants;
 import com.deadlockArena.Game;
 import com.deadlockArena.backEnd.service.Microservice;
+import com.deadlockArena.config.SpringUtils;
 import com.deadlockArena.dto.ChampionDto;
 import com.deadlockArena.frontEnd.logic.Coordinate;
 import com.deadlockArena.frontEnd.logic.SelectGrid;
@@ -69,7 +69,10 @@ public class MainFrame extends JFrame {
 	private PotionButton hp1, mp1, hp2, mp2;
 
 	public MainFrame() {
-		// this.microservice = SpringUtils.microservice;
+		this.microservice = SpringUtils.microservice;
+		System.out.println(SpringUtils.microservice);
+		System.out.println(this.microservice);
+
 		super.setTitle("Deadlock Arena");
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setLayout(new BorderLayout());
@@ -184,7 +187,6 @@ public class MainFrame extends JFrame {
 		super.add(panelSouth, BorderLayout.SOUTH);
 	}
 
-	@PostConstruct
 	public void addSelectButtons(Game game, SelectGrid selectGrid) throws Exception {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
