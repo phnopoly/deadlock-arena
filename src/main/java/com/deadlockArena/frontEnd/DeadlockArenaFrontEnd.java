@@ -220,7 +220,7 @@ public class DeadlockArenaFrontEnd extends Application {
 		this.paneSouth.getChildren().add(Constants.AAS.getSoundButton());
 		this.paneSouth.getChildren().add(Constants.AAS.getMusicButton());
 		this.paneSouth.getChildren().add(Constants.AAS.getLoopButton());
-		this.paneSouth.getChildren().add(Constants.AAS.getSoundtrackButton());
+		// this.paneSouth.getChildren().add(Constants.AAS.getSoundtrackButton());
 		this.paneSouth.getChildren().add(this.playerLabel);
 		this.paneSouth.getChildren().add(this.cancel);
 		// ---------------------------------------------------------------------------
