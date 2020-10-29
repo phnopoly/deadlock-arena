@@ -12,7 +12,7 @@ public interface ChampionMapper {
 
 	ChampionDto entitiyToDto(final Champion champion);
 
-	Champion dtoToEntity(final ChampionDto champion);
+	Champion dtoToEntity(final ChampionDto championDto);
 
 	List<ChampionDto> entitiyToDto(final List<Champion> champions);
 

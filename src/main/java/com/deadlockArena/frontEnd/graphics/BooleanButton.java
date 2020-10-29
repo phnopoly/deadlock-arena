@@ -1,30 +1,31 @@
 package com.deadlockArena.frontEnd.graphics;
 
-import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 import com.deadlockArena.Constants;
 import com.deadlockArena.exception.CornerCaseException;
 
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class BooleanButton extends JButton {
+public class BooleanButton extends Button {
 	private static final long serialVersionUID = -4636335771363956811L;
 
 	private String fileName;
+	private ImageIcon icon;
 	private boolean on;
 
 	public BooleanButton(String fileName) throws CornerCaseException {
-		this.setPreferredSize(new Dimension(Constants.PIXEL / 2, Constants.PIXEL / 2));
 		String start = "";
 		if (fileName.equals("pics/music")) {
 			start = "offIcon.png";
@@ -38,10 +39,11 @@ public class BooleanButton extends JButton {
 		} else {
 			throw new CornerCaseException("BooleanButton: Incorrect filename input");
 		}
-		Image image = new ImageIcon(fileName + start).getImage()
-				.getScaledInstance(Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH);
-		this.setIcon(new ImageIcon(image));
-		addMouseListener(mL);
+		ImageView iv = new ImageView(new Image(new File(fileName + start).toURI().toString()));
+		iv.setFitHeight(Constants.PIXEL / 2);
+		iv.setFitWidth(Constants.PIXEL / 2);
+		super.setGraphic(iv);
+//		addMouseListener(mL);
 		this.fileName = fileName;
 	}
 
@@ -49,14 +51,12 @@ public class BooleanButton extends JButton {
 		public void mousePressed(MouseEvent e) {
 			BooleanButton bb = BooleanButton.this;
 
-			if (bb.isOn())
-				bb.setIcon(new ImageIcon(
-						new ImageIcon(fileName + "OffIcon.png").getImage().getScaledInstance(
-								Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH)));
-			else
-				bb.setIcon(new ImageIcon(
-						new ImageIcon(fileName + "OnIcon.png").getImage().getScaledInstance(
-								Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH)));
+//			if (bb.isOn())
+//				bb.setIcon(new ImageIcon(new ImageIcon(fileName + "OffIcon.png").getImage()
+//						.getScaledInstance(Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH)));
+//			else
+//				bb.setIcon(new ImageIcon(new ImageIcon(fileName + "OnIcon.png").getImage()
+//						.getScaledInstance(Constants.PIXEL / 2, Constants.PIXEL / 2, Image.SCALE_SMOOTH)));
 
 			bb.invert();
 			// evalFunctionality();
@@ -84,18 +84,18 @@ public class BooleanButton extends JButton {
 			}
 			break;
 		case "loop":
-			if (isEnabled()) {
-				aAS.stopMusic();
-				if (on) {
-					aAS.getSoundtrackButton().setEnabled(false);
-					if (aAS.getMusicButton().isOn())
-						aAS.loopMusic();
-				} else {
-					aAS.getSoundtrackButton().setEnabled(true);
-					if (aAS.getMusicButton().isOn())
-						aAS.startMusic();
-				}
-			}
+//			if (isEnabled()) {
+//				aAS.stopMusic();
+//				if (on) {
+//					aAS.getSoundtrackButton().setEnabled(false);
+//					if (aAS.getMusicButton().isOn())
+//						aAS.loopMusic();
+//				} else {
+//					aAS.getSoundtrackButton().setEnabled(true);
+//					if (aAS.getMusicButton().isOn())
+//						aAS.startMusic();
+//				}
+//			}
 		default:
 		}
 	}

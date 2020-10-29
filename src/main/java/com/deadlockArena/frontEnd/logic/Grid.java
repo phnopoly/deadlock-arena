@@ -1,10 +1,9 @@
 package com.deadlockArena.frontEnd.logic;
 
-import javax.swing.JButton;
-
 import com.deadlockArena.Constants;
 import com.deadlockArena.exception.CornerCaseException;
 
+import javafx.scene.control.Button;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -12,30 +11,30 @@ import lombok.Data;
 @AllArgsConstructor
 public abstract class Grid {
 
-	protected JButton [ ] [ ] jButtons;
+	protected Button[][] buttons;
 
 	public void enableAll() {
-		for (int i = 0; i < jButtons.length; i++) {
-			for (int j = 0; j < jButtons [ i ].length; j++) {
-				this.getJButton(i, j).setEnabled(true);
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons[i].length; j++) {
+//				this.getButton(i, j).setEnabled(true);
 			}
 		}
 	}
 
 	public void disableAll() {
-		for (int i = 0; i < jButtons.length; i++) {
-			for (int j = 0; j < jButtons [ i ].length; j++) {
-				this.getJButton(i, j).setEnabled(false);
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons[i].length; j++) {
+//				this.getButton(i, j).setEnabled(false);
 			}
 		}
 	}
 
 	public void enableAllIfSelected() {
-		for (int i = 0; i < jButtons.length; i++) {
-			for (int j = 0; j < jButtons [ i ].length; j++) {
-				if (!this.getJButton(i, j).isSelected()) {
-					this.getJButton(i, j).setEnabled(true);
-				}
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons[i].length; j++) {
+//				if (!this.getButton(i, j).isSelected()) {
+//					this.getButton(i, j).setEnabled(true);
+//				}
 			}
 		}
 	}
@@ -43,7 +42,7 @@ public abstract class Grid {
 	public void clearBorders() {
 		for (int i = 0; i < Constants.SLOT_ROW_COUNT; i++) {
 			for (int j = 0; j < Constants.SLOT_COL_COUNT; j++) {
-				this.getJButton(i, j).setBorder(Constants.DEFAULT_BORDER);
+//				this.getButton(i, j).setBorder(Constants.DEFAULT_BORDER);
 			}
 		}
 	}
@@ -58,7 +57,7 @@ public abstract class Grid {
 	 * @param j - j'th coordinate.
 	 * @return the j button.
 	 */
-	public abstract JButton getJButton(int i, int j);
+	public abstract Button getButton(int i, int j);
 
 	/**
 	 * Set the jButton of an element in jButtons.
@@ -67,8 +66,8 @@ public abstract class Grid {
 	 * @param j       - j'th coordinate.
 	 * @param jButton - the jButton to set it to.
 	 */
-	public void setJButton(int i, int j, JButton jButton) {
-		this.jButtons [ i ] [ j ] = jButton;
+	public void setButton(int i, int j, Button button) {
+		this.buttons[i][j] = button;
 	}
 
 	/**
@@ -78,10 +77,10 @@ public abstract class Grid {
 	 * @return the coordinate.
 	 * @throws CornerCaseException
 	 */
-	public Coordinate getCoord(JButton jB) {
-		for (int i = 0; i < jButtons.length; i++) {
-			for (int j = 0; j < jButtons [ i ].length; j++) {
-				if (jB.equals(jButtons [ i ] [ j ])) {
+	public Coordinate getCoord(Button button) {
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons[i].length; j++) {
+				if (button.equals(buttons[i][j])) {
 					return new Coordinate(i, j);
 				}
 			}

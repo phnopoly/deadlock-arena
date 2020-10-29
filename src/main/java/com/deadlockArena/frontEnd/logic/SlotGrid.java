@@ -23,7 +23,7 @@ public final class SlotGrid extends Grid {
 	 * @param slotButtons
 	 * @param position
 	 */
-	public SlotGrid(SlotButton [ ] [ ] slotButtons, String position) {
+	public SlotGrid(SlotButton[][] slotButtons, String position) {
 		super(slotButtons);
 		this.position = position;
 	}
@@ -34,14 +34,14 @@ public final class SlotGrid extends Grid {
 	 * @throws CornerCaseException
 	 * @throws InstanceMismatchException
 	 */
-	public void checkForDeads(DeadButton [ ] deads) throws CornerCaseException {
+	public void checkForDeads(DeadButton[] deads) throws CornerCaseException {
 		for (int i = 0; i < Constants.SLOT_ROW_COUNT; i++) {
 			for (int j = 0; j < Constants.SLOT_COL_COUNT; j++) {
-				ChampionDto champion = this.getJButton(i, j).getChampionDto();
+				ChampionDto champion = this.getButton(i, j).getChampionDto();
 				if (champion == null) {
 					continue;
 				} else if (champion.isDead()) {
-					transferchampion(getJButton(i, j), deads);
+					transferchampion(getButton(i, j), deads);
 				} else {
 					throw new CornerCaseException("checkForDeads() in Grid.class");
 				}
@@ -54,17 +54,17 @@ public final class SlotGrid extends Grid {
 	 * @param sB    - slot button of champion to transfer
 	 * @param deads - list of dead champion buttons
 	 */
-	private void transferchampion(SlotButton slotButton, DeadButton [ ] deads) {
+	private void transferchampion(SlotButton slotButton, DeadButton[] deads) {
 		ChampionDto h = slotButton.getChampionDto();
 
 		for (int i = 0; i < deads.length; i++)
-			if (deads [ i ].getChampionDto() == null) {
-				deads [ i ].insertDead(h);
+			if (deads[i].getChampionDto() == null) {
+				deads[i].insertDead(h);
 				break;
 			}
 
-		slotButton.setBackground(Constants.DEFAULT_BACKGROUND);
-		slotButton.removeAll();
+//		slotButton.setBackground(Constants.DEFAULT_BACKGROUND);
+//		slotButton.removeAll();
 		slotButton.setChampionDto(null);
 //		slotButton.removeMouseListener(slotButton.getML2());
 //		slotButton.removeMouseListener(slotButton.getML4());
@@ -82,9 +82,9 @@ public final class SlotGrid extends Grid {
 	 */
 	public int getNumberOfChampionDtos() {
 		int count = 0;
-		for (int i = 0; i < super.jButtons.length; i++) {
-			for (int j = 0; j < super.jButtons [ i ].length; j++) {
-				if (super.jButtons [ i ] [ j ] != null) {
+		for (int i = 0; i < super.buttons.length; i++) {
+			for (int j = 0; j < super.buttons[i].length; j++) {
+				if (super.buttons[i][j] != null) {
 					count++;
 				}
 			}
@@ -93,22 +93,21 @@ public final class SlotGrid extends Grid {
 	}
 
 	@Override
-	public SlotButton getJButton(int i, int j) {
-		return (SlotButton) super.jButtons [ i ] [ j ];
+	public SlotButton getButton(int i, int j) {
+		return (SlotButton) super.buttons[i][j];
 	}
 
 	@Override
-	public SlotButton [ ] [ ] getJButtons() {
-		return (SlotButton [ ] [ ]) super.jButtons;
+	public SlotButton[][] getButtons() {
+		return (SlotButton[][]) super.buttons;
 	}
 
 	@Override
 	public void addMouseListener(int mLNumber) {
 
-		for (int i = 0; i < jButtons.length; i++) {
-			for (int j = 0; j < jButtons [ i ].length; j++) {
-				this.getJButton(i, j)
-						.addMouseListener(chooseMouseListener(mLNumber, this.getJButton(i, j)));
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons[i].length; j++) {
+//				this.getButton(i, j).addMouseListener(chooseMouseListener(mLNumber, this.getButton(i, j)));
 			}
 		}
 	}

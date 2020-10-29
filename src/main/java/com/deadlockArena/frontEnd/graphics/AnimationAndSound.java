@@ -1,8 +1,6 @@
 package com.deadlockArena.frontEnd.graphics;
 
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.sound.sampled.AudioFormat;
@@ -12,11 +10,11 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.SourceDataLine;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 import com.deadlockArena.Constants;
 import com.deadlockArena.exception.CornerCaseException;
 
+import javafx.scene.control.Button;
 import lombok.Data;
 
 @Data
@@ -25,43 +23,42 @@ public class AnimationAndSound {
 	private AudioInputStream inputStreamSound;
 	private AudioInputStream inputStreamMusic;
 	private Clip music;
-	private String [ ] soundtracks;
+	private String[] soundtracks;
 	private boolean changedMusic;
 	private final int DELAY = 20;
 
 	private BooleanButton soundButton, musicButton, loopButton;
-	private JButton soundtrackButton;
+	private Button soundtrackButton;
 	private String soundtrack;
 
 	public AnimationAndSound() {
 		changedMusic = false;
 		// initSoundTracks();
 
-		soundtrackButton = new JButton("Soundtracks");
-		soundtrackButton.setFont(Constants.BASIC_FONT);
-		soundtrackButton.setEnabled(false);
-		soundtrackButton.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (soundtrackButton.isEnabled()) {
-					String selected = (String) JOptionPane.showInputDialog(null,
-							"Please choose a song", "Soundtracks", JOptionPane.QUESTION_MESSAGE,
-							null, soundtracks, soundtrack);
-					if (selected != null) {
-						soundtrack = selected;
-						if (loopButton.isOn()) {
-							changedMusic = true;
-							stopMusic();
-							loopMusic();
-						} else {
-							stopMusic();
-							initMusic();
-							startMusic();
-						}
-					} else
-						return;
-				}
-			}
-		});
+		soundtrackButton = new Button("Soundtracks");
+//		soundtrackButton.setFont(Constants.BASIC_FONT);
+//		soundtrackButton.setEnabled(false);
+//		soundtrackButton.addMouseListener(new MouseAdapter() {
+//			public void mousePressed(MouseEvent e) {
+//				if (soundtrackButton.isEnabled()) {
+//					String selected = (String) JOptionPane.showInputDialog(null, "Please choose a song", "Soundtracks",
+//							JOptionPane.QUESTION_MESSAGE, null, soundtracks, soundtrack);
+//					if (selected != null) {
+//						soundtrack = selected;
+//						if (loopButton.isOn()) {
+//							changedMusic = true;
+//							stopMusic();
+//							loopMusic();
+//						} else {
+//							stopMusic();
+//							initMusic();
+//							startMusic();
+//						}
+//					} else
+//						return;
+//				}
+//			}
+//		});
 		try {
 			soundButton = new BooleanButton("pics/sound");
 			musicButton = new BooleanButton("pics/music");
@@ -112,8 +109,7 @@ public class AnimationAndSound {
 		if (soundButton.isOn()) {
 			String sound = selectSount(soundType);
 			try {
-				inputStreamSound = AudioSystem
-						.getAudioInputStream(new File("sound/" + sound + ".wav"));
+				inputStreamSound = AudioSystem.getAudioInputStream(new File("sound/" + sound + ".wav"));
 				Clip clip = AudioSystem.getClip();
 				clip.open(inputStreamSound);
 				clip.loop(0);
@@ -129,7 +125,7 @@ public class AnimationAndSound {
 			public void run() {
 				while (true) {
 					shufflePlaylist();
-					byte [ ] buffer = new byte [ 4096 ];
+					byte[] buffer = new byte[4096];
 					for (String fileString : soundtracks) {
 						try {
 							inputStreamMusic = AudioSystem
@@ -166,8 +162,7 @@ public class AnimationAndSound {
 		if (soundtrack == null)
 			return;
 		try {
-			inputStreamMusic = AudioSystem
-					.getAudioInputStream(new File("music/" + soundtrack + ".wav"));
+			inputStreamMusic = AudioSystem.getAudioInputStream(new File("music/" + soundtrack + ".wav"));
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
@@ -227,9 +222,9 @@ public class AnimationAndSound {
 		Constants.RANDOM.nextInt();
 		for (int i = 0; i < n; i++) {
 			int change = i + Constants.RANDOM.nextInt(n - i);
-			String placeHolder = soundtracks [ i ];
-			soundtracks [ i ] = soundtracks [ change ];
-			soundtracks [ change ] = placeHolder;
+			String placeHolder = soundtracks[i];
+			soundtracks[i] = soundtracks[change];
+			soundtracks[change] = placeHolder;
 		}
 	}
 }

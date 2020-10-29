@@ -18,22 +18,16 @@ public class DeadlockArenaApplication implements CommandLineRunner {
 
 	public static final Logger LOG = LoggerFactory.getLogger(DeadlockArenaApplication.class);
 
-	private static final boolean RUN_APP = true;
-
 	@Override
 	public void run(String... arg) throws Exception {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				if (RUN_APP) {
-					Game g = new Game();
-					g.executePhase1();
-					g.executePhase2();
-				}
+
 			}
 		});
 	}
 
-	public static void main(String [ ] args) {
+	public static void main(String[] args) {
 		SpringApplicationBuilder sAB = new SpringApplicationBuilder(DeadlockArenaApplication.class);
 		sAB.headless(false);
 		sAB.run(args);
@@ -43,7 +37,7 @@ public class DeadlockArenaApplication implements CommandLineRunner {
 	}
 
 	private static void getAllBeans() {
-		String [ ] allBeanNames = applicationContext.getBeanDefinitionNames();
+		String[] allBeanNames = applicationContext.getBeanDefinitionNames();
 		try {
 			FileWriter myWriter = new FileWriter("beans.txt");
 			for (String beanName : allBeanNames) {

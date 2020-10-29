@@ -1,20 +1,19 @@
 package com.deadlockArena.frontEnd.graphics;
 
-import javax.swing.JButton;
-
-import com.deadlockArena.Constants;
-
+import javafx.scene.control.Button;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CancelButton extends JButton {
+@NoArgsConstructor
+public class CancelButton extends Button {
 	private static final long serialVersionUID = 4505212405863517256L;
 
 	public CancelButton(MainFrame mainFrame) {
 		// addMouseListener(mL1);
-		setFont(Constants.BASIC_FONT);
+		// setFont(Constants.BASIC_FONT);
 	}
 
 //	private MouseListener mL1 = new MouseAdapter() {
