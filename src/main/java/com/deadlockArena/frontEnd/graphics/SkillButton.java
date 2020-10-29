@@ -1,9 +1,5 @@
 package com.deadlockArena.frontEnd.graphics;
 
-import java.awt.AlphaComposite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,53 +20,53 @@ public class SkillButton extends JButton {
 	private double fraction;
 
 	public SkillButton() {
-//		setBackground(Constants.DEFAULT_BACKGROUND);
+		//		setBackground(Constants.DEFAULT_BACKGROUND);
 		try {
 			this.gray = ImageIO.read(new File("pics/gray.png"));
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void setSkillButton(String filename, double fraction) {
+	public void setSkillButton(final String filename, final double fraction) {
 		if (filename == null) {
 			this.color = null;
-			repaint();
+			this.repaint();
 			return;
 		}
 		this.fraction = fraction;
 		try {
-			color = ImageIO.read(new File(filename));
-		} catch (IOException e) {
+			this.color = ImageIO.read(new File(filename));
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
-		repaint();
+		this.repaint();
 	}
 
-	@Override
-	public void paintComponent(Graphics g) {
-		if (color == null) {
-			super.paintComponent(g);
-			return;
-		}
-		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.drawImage(gray, 0, 0, this);
-		g2d.drawImage(maskedEffect(), 0, 0, this);
-		g2d.dispose();
-	}
-
-	public BufferedImage maskedEffect() {
-		int width = color.getWidth();
-		int height = color.getHeight();
-		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2d = img.createGraphics();
-		Arc2D.Double expose = new Arc2D.Double(-(width / 2d), -(height / 2d), width * 2d, height * 2d, 90,
-				-(360.0d * fraction), Arc2D.PIE);
-		g2d.fill(expose);
-		g2d.setComposite(AlphaComposite.SrcIn);
-		g2d.drawImage(color, 0, 0, this);
-		g2d.dispose();
-		return img;
-	}
+	//	@Override
+	//	public void paintComponent(final Graphics g) {
+	//		if (this.color == null) {
+	//			super.paintComponent(g);
+	//			return;
+	//		}
+	//		final Graphics2D g2d = (Graphics2D) g.create();
+	//		g2d.drawImage(this.gray, 0, 0, this);
+	//		g2d.drawImage(this.maskedEffect(), 0, 0, this);
+	//		g2d.dispose();
+	//	}
+	//
+	//	public BufferedImage maskedEffect() {
+	//		final int width = this.color.getWidth();
+	//		final int height = this.color.getHeight();
+	//		final BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	//		final Graphics2D g2d = img.createGraphics();
+	//		final Arc2D.Double expose = new Arc2D.Double(-(width / 2d), -(height / 2d), width * 2d, height * 2d, 90,
+	//				-(360.0d * this.fraction), Arc2D.PIE);
+	//		g2d.fill(expose);
+	//		g2d.setComposite(AlphaComposite.SrcIn);
+	//		g2d.drawImage(this.color, 0, 0, this);
+	//		g2d.dispose();
+	//		return img;
+	//	}
 
 }

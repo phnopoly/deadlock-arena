@@ -6,7 +6,6 @@ import com.deadlockArena.backEnd.entity.HpPotion;
 import com.deadlockArena.backEnd.entity.MpPotion;
 import com.deadlockArena.backEnd.entity.PotionInventory;
 import com.deadlockArena.backEnd.entity.StatusBox;
-import com.deadlockArena.frontEnd.Constants;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -71,75 +70,75 @@ public class ChampionDto extends BaseDto implements Serializable {
 	protected StatusBox statusBox;
 
 	// TO-DO evaluate the return type
-	public int [ ] drinkPotion(boolean hp) {
+	public int [ ] drinkPotion(final boolean hp) {
 		if (hp) {
-			if (potionInventory.getHpPotions().isEmpty()) {
+			if (this.potionInventory.getHpPotions().isEmpty()) {
 				return null;
 			}
-			HpPotion p = potionInventory.getHpPotions().get(0);
-			this.currentHp = currentHp + p.getRecovery() >= maxHp ? maxHp
-					: currentHp + p.getRecovery();
-			potionInventory.getHpPotions().remove(0);
-			return new int [ ] { p.getRecovery() , currentHp };
+			final HpPotion p = this.potionInventory.getHpPotions().get(0);
+			this.currentHp = this.currentHp + p.getRecovery() >= this.maxHp ? this.maxHp
+					: this.currentHp + p.getRecovery();
+			this.potionInventory.getHpPotions().remove(0);
+			return new int [ ] { p.getRecovery() , this.currentHp };
 		} else {
-			if (potionInventory.getMpPotions().isEmpty()) {
+			if (this.potionInventory.getMpPotions().isEmpty()) {
 				return null;
 			}
-			MpPotion p = potionInventory.getMpPotions().get(0);
-			this.currentMp = currentMp + p.getRecovery() >= maxMp ? maxMp
-					: currentMp + p.getRecovery();
-			potionInventory.getHpPotions().remove(0);
-			return new int [ ] { p.getRecovery() , currentMp };
+			final MpPotion p = this.potionInventory.getMpPotions().get(0);
+			this.currentMp = this.currentMp + p.getRecovery() >= this.maxMp ? this.maxMp
+					: this.currentMp + p.getRecovery();
+			this.potionInventory.getHpPotions().remove(0);
+			return new int [ ] { p.getRecovery() , this.currentMp };
 		}
 	}
 
-	public void attack(ChampionDto target) {
-		int damage = calculateNextDamage();
-
-		boolean dodged = target.isDodgedHit();
-		boolean critical = isCriticalHit();
-
-		int finalDamage;
-		if (!dodged) {
-			finalDamage = damage - target.getDefense();
-			if (critical) {
-				finalDamage *= 2;
-			}
-			if (finalDamage < 0) { // handles negative damages
-				finalDamage = 0;
-			}
-			// TO-DO move somewhere else
-//			target.setCurrentHp(target.getCurrentHp() - finalDamage);
-//			mainFrame.getGrid().checkForDeads(mainFrame);
-//			mainFrame.getAAS().shakeButton(targetButton);
-//			mainFrame.getAAS().playSound("melee");
-//			mainFrame.getMP().generateMove(mainFrame.getMessages(), mainFrame.getMove());
-//			mainFrame.getMP().generateMessage(mainFrame.getMessages(), this, target,
-//					new int [ ] { finalDamage }, new boolean [ ] { critical });
-		} else {
-//			mainFrame.getAAS().playSound("dodge");
-//			mainFrame.getMP().generateMove(mainFrame.getMessages(), mainFrame.getMove());
-//			mainFrame.getMP().generateMessage(mainFrame.getMessages(), this, target);
-		}
+	public void attack(final ChampionDto target) {
+		//		final int damage = calculateNextDamage();
+		//
+		//		final boolean dodged = target.isDodgedHit();
+		//		final boolean critical = isCriticalHit();
+		//
+		//		int finalDamage;
+		//		if (!dodged) {
+		//			finalDamage = damage - target.getDefense();
+		//			if (critical) {
+		//				finalDamage *= 2;
+		//			}
+		//			if (finalDamage < 0) { // handles negative damages
+		//				finalDamage = 0;
+		//			}
+		//			// TO-DO move somewhere else
+		//			//			target.setCurrentHp(target.getCurrentHp() - finalDamage);
+		//			//			mainFrame.getGrid().checkForDeads(mainFrame);
+		//			//			mainFrame.getAAS().shakeButton(targetButton);
+		//			//			mainFrame.getAAS().playSound("melee");
+		//			//			mainFrame.getMP().generateMove(mainFrame.getMessages(), mainFrame.getMove());
+		//			//			mainFrame.getMP().generateMessage(mainFrame.getMessages(), this, target,
+		//			//					new int [ ] { finalDamage }, new boolean [ ] { critical });
+		//		} else {
+		//			//			mainFrame.getAAS().playSound("dodge");
+		//			//			mainFrame.getMP().generateMove(mainFrame.getMessages(), mainFrame.getMove());
+		//			//			mainFrame.getMP().generateMessage(mainFrame.getMessages(), this, target);
+		//		}
 
 	}
 
-	public int calculateNextDamage() {
-		return Constants.RANDOM.nextInt((maxDmg - minDmg) + 1) + minDmg;
-	}
-
-	public boolean isCriticalHit() {
-		return Constants.RANDOM.nextInt(101) < critical;
-	}
-
-	public boolean isDodgedHit() {
-		return Constants.RANDOM.nextInt(101) < dodge;
-	}
+	//	public int calculateNextDamage() {
+	//		return Constants.RANDOM.nextInt((maxDmg - minDmg) + 1) + minDmg;
+	//	}
+	//
+	//	public boolean isCriticalHit() {
+	//		return Constants.RANDOM.nextInt(101) < critical;
+	//	}
+	//
+	//	public boolean isDodgedHit() {
+	//		return Constants.RANDOM.nextInt(101) < dodge;
+	//	}
 
 	public String evalColor() {
-		if ((double) currentHp / maxHp <= .25) {
+		if ((double) this.currentHp / this.maxHp <= .25) {
 			return "red";
-		} else if ((double) currentHp / maxHp <= .50) {
+		} else if ((double) this.currentHp / this.maxHp <= .50) {
 			return "yellow";
 		} else {
 			return "white";
@@ -147,29 +146,29 @@ public class ChampionDto extends BaseDto implements Serializable {
 	}
 
 	public boolean isDead() {
-		if (currentHp < 0) {
-			currentHp = 0;
+		if (this.currentHp < 0) {
+			this.currentHp = 0;
 		}
-		return currentHp == 0;
+		return this.currentHp == 0;
 	}
 
-	public double evalFraction(int i) {
+	public double evalFraction(final int i) {
 		double frac = 0.0;
 		switch (i) {
 		case 0:
-			frac = (double) currentSkill1CD / skill1CD;
+			frac = (double) this.currentSkill1CD / this.skill1CD;
 			break;
 		case 1:
-			frac = (double) currentSkill2CD / skill2CD;
+			frac = (double) this.currentSkill2CD / this.skill2CD;
 			break;
 		case 2:
-			frac = (double) currentSkill3CD / skill3CD;
+			frac = (double) this.currentSkill3CD / this.skill3CD;
 			break;
 		case 3:
-			frac = (double) currentSkill4CD / skill4CD;
+			frac = (double) this.currentSkill4CD / this.skill4CD;
 			break;
 		case 4:
-			frac = (double) currentSkill5CD / skill5CD;
+			frac = (double) this.currentSkill5CD / this.skill5CD;
 			break;
 		}
 		return frac;

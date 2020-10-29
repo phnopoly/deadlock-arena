@@ -1,8 +1,8 @@
 package com.deadlockArena.frontEnd.graphics;
 
+
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import com.deadlockArena.backEnd.dto.ChampionDto;
 import com.deadlockArena.frontEnd.Constants;
 
+import javafx.scene.input.MouseEvent;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,57 +25,61 @@ public class PotionButton extends JButton {
 	private boolean cp;
 	private SlotButton sB;
 
-	public PotionButton(ImageIcon ic, boolean cp, MainFrame mainFrame) {
+	public PotionButton(final ImageIcon ic, final boolean cp, final MainFrame mainFrame) {
 		super(ic);
-		jl = new JLabel();
-//		jl.setForeground(Constants.DEFAULT_BACKGROUND);
-//		jl.setFont(Constants.BASIC_FONT);
-		jl.setOpaque(false);
-		jl.setBounds(0, 0, 20, 15);
-		this.add(jl);
+		this.jl = new JLabel();
+		//		jl.setForeground(Constants.DEFAULT_BACKGROUND);
+		//		jl.setFont(Constants.BASIC_FONT);
+		this.jl.setOpaque(false);
+		this.jl.setBounds(0, 0, 20, 15);
+		this.add(this.jl);
 		this.cp = cp;
-		addMouseListener(mL);
+		this.addMouseListener(this.mL);
 
-		setPreferredSize(new Dimension(Constants.PIXEL * 3 / 5, Constants.PIXEL * 3 / 5));
-		setLayout(null);
-		setEnabled(false);
-		setDisabledIcon(ic);
+		this.setPreferredSize(new Dimension(Constants.PIXEL * 3 / 5, Constants.PIXEL * 3 / 5));
+		this.setLayout(null);
+		this.setEnabled(false);
+		this.setDisabledIcon(ic);
 	}
 
-	public void onChampion(SlotButton sB) {
-		setEnabled(true);
+	public void onChampion(final SlotButton sB) {
+		this.setEnabled(true);
 		this.sB = sB;
-		if (cp)
-			jl.setText("" + sB.getChampionDto().getPotionInventory().getHpPotions().size());
-		else
-			jl.setText("" + sB.getChampionDto().getPotionInventory().getMpPotions().size());
+		if (this.cp) {
+			this.jl.setText("" + sB.getChampionDto().getPotionInventory().getHpPotions().size());
+		} else {
+			this.jl.setText("" + sB.getChampionDto().getPotionInventory().getMpPotions().size());
+		}
 	}
 
 	public void offchampion() {
-		setEnabled(false);
-		sB = null;
-		jl.setText("");
+		this.setEnabled(false);
+		this.sB = null;
+		this.jl.setText("");
 	}
 
 	private MouseListener mL = new MouseAdapter() {
-		public void mousePressed(MouseEvent e) {
-			if (PotionButton.this.sB == null)
+		public void mousePressed(final MouseEvent e) {
+			if (PotionButton.this.sB == null) {
 				return;
-			ChampionDto c = PotionButton.this.getSB().getChampionDto();
-			int[] info = sB.getChampionDto().drinkPotion(cp);
-			if (info == null)
+			}
+			final ChampionDto c = PotionButton.this.getSB().getChampionDto();
+			final int[] info = PotionButton.this.sB.getChampionDto().drinkPotion(PotionButton.this.cp);
+			if (info == null) {
 				return;
-			if (cp)
-				jl.setText("" + c.getPotionInventory().getHpPotions().size());
-			else
-				jl.setText("" + c.getPotionInventory().getMpPotions().size());
+			}
+			if (PotionButton.this.cp) {
+				PotionButton.this.jl.setText("" + c.getPotionInventory().getHpPotions().size());
+			} else {
+				PotionButton.this.jl.setText("" + c.getPotionInventory().getMpPotions().size());
+			}
 
-//            mainFrame.getMP().generateMove(mainFrame.getMessages(), mainFrame.getMove());
-//            mainFrame.getMP().generateMessage(mainFrame.getMessages(), c, info[0], info[1], cp);
-//            mainFrame.setPanelEast(sB, mainFrame.getPlayer());
-//            mainFrame.resetListeners();
-//            mainFrame.clearAllBorders();
-//            mainFrame.evalTurns();
+			//            mainFrame.getMP().generateMove(mainFrame.getMessages(), mainFrame.getMove());
+			//            mainFrame.getMP().generateMessage(mainFrame.getMessages(), c, info[0], info[1], cp);
+			//            mainFrame.setPanelEast(sB, mainFrame.getPlayer());
+			//            mainFrame.resetListeners();
+			//            mainFrame.clearAllBorders();
+			//            mainFrame.evalTurns();
 		}
 	};
 }

@@ -25,8 +25,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class DeadlockArenaFrontEnd extends Application {
 
 	private static final String JSON_URL = "https://api.myjson.com/bins/3jwmh";

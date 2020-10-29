@@ -1,5 +1,7 @@
 package com.deadlockArena.frontEnd.graphics;
 
+
+
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
@@ -27,7 +29,7 @@ public class SlotButton extends Button {
 	private ImageIcon normalImage, grayedImage;
 	private MouseListener mL1, mL2, mL3, mL4, mL5;
 
-	public SlotButton(String position, Coordinate coordinate) {
+	public SlotButton(final String position, final Coordinate coordinate) {
 		super.setPrefSize(Constants.PIXEL * 3 / 5, Constants.PIXEL * 3 / 5);
 		this.selected = false;
 		this.position = position;
@@ -35,7 +37,7 @@ public class SlotButton extends Button {
 
 	}
 
-	public SlotButton(Game game, String position, Coordinate coordinate) {
+	public SlotButton(final Game game, final String position, final Coordinate coordinate) {
 //		super.setEnabled(false);
 //		super.setFont(Constants.BASIC_FONT);
 		super.setPrefSize(Constants.PIXEL * 3 / 5, Constants.PIXEL * 3 / 5);

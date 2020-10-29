@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "CHAMPION", schema = "DEADLOCK")
+@Table(name = "CHAMPION", schema = "deadlock")
 public class Champion implements Serializable {
 	private static final long serialVersionUID = 5195526083757043733L;
 

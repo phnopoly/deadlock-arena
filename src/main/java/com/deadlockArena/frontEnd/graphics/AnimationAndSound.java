@@ -1,6 +1,5 @@
 package com.deadlockArena.frontEnd.graphics;
 
-import java.awt.Point;
 import java.io.File;
 
 import javax.sound.sampled.AudioFormat;
@@ -32,169 +31,172 @@ public class AnimationAndSound {
 	private String soundtrack;
 
 	public AnimationAndSound() {
-		changedMusic = false;
+		this.changedMusic = false;
 		// initSoundTracks();
 
-		soundtrackButton = new Button("Soundtracks");
-//		soundtrackButton.setFont(Constants.BASIC_FONT);
-//		soundtrackButton.setEnabled(false);
-//		soundtrackButton.addMouseListener(new MouseAdapter() {
-//			public void mousePressed(MouseEvent e) {
-//				if (soundtrackButton.isEnabled()) {
-//					String selected = (String) JOptionPane.showInputDialog(null, "Please choose a song", "Soundtracks",
-//							JOptionPane.QUESTION_MESSAGE, null, soundtracks, soundtrack);
-//					if (selected != null) {
-//						soundtrack = selected;
-//						if (loopButton.isOn()) {
-//							changedMusic = true;
-//							stopMusic();
-//							loopMusic();
-//						} else {
-//							stopMusic();
-//							initMusic();
-//							startMusic();
-//						}
-//					} else
-//						return;
-//				}
-//			}
-//		});
+		// this.soundtrackButton = new Button("Soundtracks");
+		//		soundtrackButton.setFont(Constants.BASIC_FONT);
+		//		soundtrackButton.setEnabled(false);
+		//		soundtrackButton.addMouseListener(new MouseAdapter() {
+		//			public void mousePressed(MouseEvent e) {
+		//				if (soundtrackButton.isEnabled()) {
+		//					String selected = (String) JOptionPane.showInputDialog(null, "Please choose a song", "Soundtracks",
+		//							JOptionPane.QUESTION_MESSAGE, null, soundtracks, soundtrack);
+		//					if (selected != null) {
+		//						soundtrack = selected;
+		//						if (loopButton.isOn()) {
+		//							changedMusic = true;
+		//							stopMusic();
+		//							loopMusic();
+		//						} else {
+		//							stopMusic();
+		//							initMusic();
+		//							startMusic();
+		//						}
+		//					} else
+		//						return;
+		//				}
+		//			}
+		//		});
 		try {
-			soundButton = new BooleanButton("pics/sound");
-			musicButton = new BooleanButton("pics/music");
-			loopButton = new BooleanButton("pics/loop");
-		} catch (CornerCaseException exc) {
+			this.soundButton = new BooleanButton("pics/sound");
+			this.musicButton = new BooleanButton("pics/music");
+			this.loopButton = new BooleanButton("pics/loop");
+		} catch (final CornerCaseException exc) {
 			exc.printStackTrace();
 		}
-		initMusic();
+		this.initMusic();
 	}
 
 	// TO-DO use sshConnect to access the files
-//	private void initSoundTracks() {
-//		File folder = new File("music/");
-//		File [ ] listOfFiles = folder.listFiles();
-//
-//		soundtracks = new String [ listOfFiles.length ];
-//		for (int i = 0; i < listOfFiles.length; i++) {
-//			soundtracks [ i ] = listOfFiles [ i ].getName().replace(".wav", "");
-//		}
-//		soundtrack = soundtracks [ JavaData.random.nextInt(soundtracks.length) ];
-//	}
+	//	private void initSoundTracks() {
+	//		File folder = new File("music/");
+	//		File [ ] listOfFiles = folder.listFiles();
+	//
+	//		soundtracks = new String [ listOfFiles.length ];
+	//		for (int i = 0; i < listOfFiles.length; i++) {
+	//			soundtracks [ i ] = listOfFiles [ i ].getName().replace(".wav", "");
+	//		}
+	//		soundtrack = soundtracks [ JavaData.random.nextInt(soundtracks.length) ];
+	//	}
 
-	public void shakeButton(JButton button) {
-		final Point point = button.getLocation();
-		Runnable r = new Runnable() {
-			public void run() {
-				for (int i = 0; i < 5; i++) {
-					try {
-						button.setLocation(new Point(point.x - 10, point.y));
-						Thread.sleep(DELAY);
-						button.setLocation(point);
-						Thread.sleep(DELAY);
-						button.setLocation(new Point(point.x + 10, point.y));
-						Thread.sleep(DELAY);
-						button.setLocation(point);
-						Thread.sleep(DELAY);
-					} catch (InterruptedException exc) {
-						exc.printStackTrace();
-					}
-				}
-			}
-		};
-		Thread t = new Thread(r);
-		t.start();
+	public void shakeButton(final JButton button) {
+		//		final Point point = button.getLocation();
+		//		final Runnable r = new Runnable() {
+		//			@Override
+		//			public void run() {
+		//				for (int i = 0; i < 5; i++) {
+		//					try {
+		//						button.setLocation(new Point(point.x - 10, point.y));
+		//						Thread.sleep(AnimationAndSound.this.DELAY);
+		//						button.setLocation(point);
+		//						Thread.sleep(AnimationAndSound.this.DELAY);
+		//						button.setLocation(new Point(point.x + 10, point.y));
+		//						Thread.sleep(AnimationAndSound.this.DELAY);
+		//						button.setLocation(point);
+		//						Thread.sleep(AnimationAndSound.this.DELAY);
+		//					} catch (final InterruptedException exc) {
+		//						exc.printStackTrace();
+		//					}
+		//				}
+		//			}
+		//		};
+		//		final Thread t = new Thread(r);
+		//		t.start();
 	}
 
-	public void playSound(String soundType) {
-		if (soundButton.isOn()) {
-			String sound = selectSount(soundType);
+	public void playSound(final String soundType) {
+		if (this.soundButton.isOn()) {
+			final String sound = this.selectSount(soundType);
 			try {
-				inputStreamSound = AudioSystem.getAudioInputStream(new File("sound/" + sound + ".wav"));
-				Clip clip = AudioSystem.getClip();
-				clip.open(inputStreamSound);
+				this.inputStreamSound = AudioSystem.getAudioInputStream(new File("sound/" + sound + ".wav"));
+				final Clip clip = AudioSystem.getClip();
+				clip.open(this.inputStreamSound);
 				clip.loop(0);
-			} catch (Exception exc) {
+			} catch (final Exception exc) {
 				exc.printStackTrace();
 			}
 		}
 	}
 
 	public void loopMusic() {
-		Runnable r = new Runnable() {
+		final Runnable r = new Runnable() {
 			@Override
 			public void run() {
 				while (true) {
-					shufflePlaylist();
-					byte[] buffer = new byte[4096];
-					for (String fileString : soundtracks) {
+					AnimationAndSound.this.shufflePlaylist();
+					final byte[] buffer = new byte[4096];
+					for (final String fileString : AnimationAndSound.this.soundtracks) {
 						try {
-							inputStreamMusic = AudioSystem
+							AnimationAndSound.this.inputStreamMusic = AudioSystem
 									.getAudioInputStream(new File("music/" + fileString + ".wav"));
-							AudioFormat format = inputStreamMusic.getFormat();
-							SourceDataLine line = AudioSystem.getSourceDataLine(format);
+							final AudioFormat format = AnimationAndSound.this.inputStreamMusic.getFormat();
+							final SourceDataLine line = AudioSystem.getSourceDataLine(format);
 							line.open(format);
 							line.start();
-							while (inputStreamMusic.available() > 0) {
-								if (!loopButton.isOn() || !musicButton.isOn() || changedMusic)
+							while (AnimationAndSound.this.inputStreamMusic.available() > 0) {
+								if (!AnimationAndSound.this.loopButton.isOn() || !AnimationAndSound.this.musicButton.isOn() || AnimationAndSound.this.changedMusic) {
 									return;
-								int len = inputStreamMusic.read(buffer);
+								}
+								final int len = AnimationAndSound.this.inputStreamMusic.read(buffer);
 								line.write(buffer, 0, len);
 							}
 							line.drain();
 							line.close();
-						} catch (Exception exc) {
+						} catch (final Exception exc) {
 							exc.printStackTrace();
 						}
 					}
 				}
 			}
 		};
-		if (!loopButton.isOn() || !musicButton.isOn() || changedMusic) {
-			changedMusic = false;
+		if (!this.loopButton.isOn() || !this.musicButton.isOn() || this.changedMusic) {
+			this.changedMusic = false;
 			return;
 		}
-		Thread loopingMusic = new Thread(r);
+		final Thread loopingMusic = new Thread(r);
 		loopingMusic.start();
 
 	}
 
 	private void initMusic() {
-		if (soundtrack == null)
+		if (this.soundtrack == null) {
 			return;
+		}
 		try {
-			inputStreamMusic = AudioSystem.getAudioInputStream(new File("music/" + soundtrack + ".wav"));
-		} catch (Exception exc) {
+			this.inputStreamMusic = AudioSystem.getAudioInputStream(new File("music/" + this.soundtrack + ".wav"));
+		} catch (final Exception exc) {
 			exc.printStackTrace();
 		}
 	}
 
 	public void startMusic() {
-		if (musicButton.isOn()) {
+		if (this.musicButton.isOn()) {
 			try {
-				music = AudioSystem.getClip();
-				initMusic();
-				music.open(inputStreamMusic);
-				music.loop(Clip.LOOP_CONTINUOUSLY);
-				controlVolume(music, -15);
-			} catch (Exception exc) {
+				this.music = AudioSystem.getClip();
+				this.initMusic();
+				this.music.open(this.inputStreamMusic);
+				this.music.loop(Clip.LOOP_CONTINUOUSLY);
+				this.controlVolume(this.music, -15);
+			} catch (final Exception exc) {
 				exc.printStackTrace();
 			}
 		}
 	}
 
 	public void stopMusic() {
-		if (music != null) {
-			music.close();
+		if (this.music != null) {
+			this.music.close();
 		}
 	}
 
-	private void controlVolume(Clip c, float f) {
-		FloatControl gainControl = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
+	private void controlVolume(final Clip c, final float f) {
+		final FloatControl gainControl = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue(f);
 		// Reduce volume by f decibels.
 	}
 
-	private String selectSount(String soundType) {
+	private String selectSount(final String soundType) {
 		String sound = "";
 		switch (soundType) {
 		case "melee":
@@ -218,13 +220,13 @@ public class AnimationAndSound {
 	}
 
 	private void shufflePlaylist() {
-		int n = soundtracks.length;
+		final int n = this.soundtracks.length;
 		Constants.RANDOM.nextInt();
 		for (int i = 0; i < n; i++) {
-			int change = i + Constants.RANDOM.nextInt(n - i);
-			String placeHolder = soundtracks[i];
-			soundtracks[i] = soundtracks[change];
-			soundtracks[change] = placeHolder;
+			final int change = i + Constants.RANDOM.nextInt(n - i);
+			final String placeHolder = this.soundtracks[i];
+			this.soundtracks[i] = this.soundtracks[change];
+			this.soundtracks[change] = placeHolder;
 		}
 	}
 }
