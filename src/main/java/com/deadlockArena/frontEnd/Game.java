@@ -1,4 +1,4 @@
-package com.deadlockArena;
+package com.deadlockArena.frontEnd;
 
 import com.deadlockArena.frontEnd.graphics.MainFrame;
 import com.deadlockArena.frontEnd.graphics.SelectButton;

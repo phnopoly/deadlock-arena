@@ -2,11 +2,11 @@ package com.deadlockArena.backEnd.dto;
 
 import java.io.Serializable;
 
-import com.deadlockArena.Constants;
 import com.deadlockArena.backEnd.entity.HpPotion;
 import com.deadlockArena.backEnd.entity.MpPotion;
 import com.deadlockArena.backEnd.entity.PotionInventory;
 import com.deadlockArena.backEnd.entity.StatusBox;
+import com.deadlockArena.frontEnd.Constants;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

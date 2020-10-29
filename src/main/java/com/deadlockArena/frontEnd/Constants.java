@@ -1,4 +1,4 @@
-package com.deadlockArena;
+package com.deadlockArena.frontEnd;
 
 import java.util.Random;
 

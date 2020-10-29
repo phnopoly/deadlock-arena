@@ -1,4 +1,4 @@
-package com.deadlockArena;
+package com.deadlockArena.backEnd;
 
 import java.awt.EventQueue;
 import java.io.FileWriter;

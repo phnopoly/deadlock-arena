@@ -6,8 +6,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import com.deadlockArena.Constants;
 import com.deadlockArena.backEnd.dto.ChampionDto;
+import com.deadlockArena.frontEnd.Constants;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

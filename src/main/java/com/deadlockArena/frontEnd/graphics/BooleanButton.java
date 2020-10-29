@@ -7,7 +7,7 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 
-import com.deadlockArena.Constants;
+import com.deadlockArena.frontEnd.Constants;
 import com.deadlockArena.frontEnd.exception.CornerCaseException;
 
 import javafx.scene.control.Button;

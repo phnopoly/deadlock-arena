@@ -7,9 +7,9 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import com.deadlockArena.Constants;
-import com.deadlockArena.DeadlockArenaFrontEnd;
 import com.deadlockArena.backEnd.dto.ChampionDto;
+import com.deadlockArena.frontEnd.Constants;
+import com.deadlockArena.frontEnd.DeadlockArenaFrontEnd;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;

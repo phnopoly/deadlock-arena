@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.deadlockArena.Constants;
+import com.deadlockArena.frontEnd.Constants;
 
 import lombok.Data;
 

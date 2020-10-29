@@ -11,7 +11,7 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.SourceDataLine;
 import javax.swing.JButton;
 
-import com.deadlockArena.Constants;
+import com.deadlockArena.frontEnd.Constants;
 import com.deadlockArena.frontEnd.exception.CornerCaseException;
 
 import javafx.scene.control.Button;

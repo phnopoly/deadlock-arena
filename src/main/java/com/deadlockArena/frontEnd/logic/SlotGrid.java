@@ -2,8 +2,8 @@ package com.deadlockArena.frontEnd.logic;
 
 import java.awt.event.MouseListener;
 
-import com.deadlockArena.Constants;
 import com.deadlockArena.backEnd.dto.ChampionDto;
+import com.deadlockArena.frontEnd.Constants;
 import com.deadlockArena.frontEnd.exception.CornerCaseException;
 import com.deadlockArena.frontEnd.exception.InstanceMismatchException;
 import com.deadlockArena.frontEnd.graphics.DeadButton;

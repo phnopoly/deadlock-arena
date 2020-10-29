@@ -5,9 +5,9 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import com.deadlockArena.Constants;
-import com.deadlockArena.Game;
 import com.deadlockArena.backEnd.dto.ChampionDto;
+import com.deadlockArena.frontEnd.Constants;
+import com.deadlockArena.frontEnd.Game;
 import com.deadlockArena.frontEnd.logic.Coordinate;
 
 import javafx.scene.control.Button;

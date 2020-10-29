@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.deadlockArena.DeadlockArenaBackEnd;
+import com.deadlockArena.backEnd.DeadlockArenaBackEnd;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice {

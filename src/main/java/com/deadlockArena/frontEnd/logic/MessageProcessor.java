@@ -2,8 +2,8 @@ package com.deadlockArena.frontEnd.logic;
 
 import javax.swing.JTextArea;
 
-import com.deadlockArena.Constants;
 import com.deadlockArena.backEnd.dto.ChampionDto;
+import com.deadlockArena.frontEnd.Constants;
 import com.deadlockArena.frontEnd.graphics.SelectButton;
 
 public class MessageProcessor {
