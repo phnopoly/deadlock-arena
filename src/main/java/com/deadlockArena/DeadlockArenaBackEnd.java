@@ -10,8 +10,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "com.deadlockArena.backEnd")
 public class DeadlockArenaBackEnd implements CommandLineRunner {
 
 	private static ApplicationContext applicationContext;
@@ -19,32 +21,33 @@ public class DeadlockArenaBackEnd implements CommandLineRunner {
 	public static final Logger LOG = LoggerFactory.getLogger(DeadlockArenaBackEnd.class);
 
 	@Override
-	public void run(String... arg) throws Exception {
+	public void run(final String... arg) throws Exception {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 
 			}
 		});
 	}
 
-	public static void main(String[] args) {
-		SpringApplicationBuilder sAB = new SpringApplicationBuilder(DeadlockArenaBackEnd.class);
+	public static void main(final String[] args) {
+		final SpringApplicationBuilder sAB = new SpringApplicationBuilder(DeadlockArenaBackEnd.class);
 		sAB.headless(false);
 		sAB.run(args);
 
-		applicationContext = sAB.context();
-		getAllBeans();
+		DeadlockArenaBackEnd.applicationContext = sAB.context();
+		DeadlockArenaBackEnd.getAllBeans();
 	}
 
 	private static void getAllBeans() {
-		String[] allBeanNames = applicationContext.getBeanDefinitionNames();
+		final String[] allBeanNames = DeadlockArenaBackEnd.applicationContext.getBeanDefinitionNames();
 		try {
-			FileWriter myWriter = new FileWriter("beans.txt");
-			for (String beanName : allBeanNames) {
+			final FileWriter myWriter = new FileWriter("beans.txt");
+			for (final String beanName : allBeanNames) {
 				myWriter.write(beanName + "\n");
 			}
 			myWriter.close();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}

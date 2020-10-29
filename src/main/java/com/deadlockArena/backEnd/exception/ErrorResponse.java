@@ -1,4 +1,4 @@
-package com.deadlockArena.exception;
+package com.deadlockArena.backEnd.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

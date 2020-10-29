@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
+import com.deadlockArena.backEnd.dto.ChampionDto;
 import com.deadlockArena.backEnd.entity.Champion;
-import com.deadlockArena.dto.ChampionDto;
 
 @Mapper(componentModel = "spring")
 public interface ChampionMapper {

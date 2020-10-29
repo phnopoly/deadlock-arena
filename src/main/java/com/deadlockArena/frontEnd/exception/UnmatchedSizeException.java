@@ -1,4 +1,4 @@
-package com.deadlockArena.exception;
+package com.deadlockArena.frontEnd.exception;
 
 public class UnmatchedSizeException extends Exception {
 	private static final long serialVersionUID = -535738597460922631L;

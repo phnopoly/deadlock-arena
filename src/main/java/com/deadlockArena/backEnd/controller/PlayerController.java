@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.deadlockArena.backEnd.dto.PlayerDto;
 import com.deadlockArena.backEnd.entity.Player;
 import com.deadlockArena.backEnd.service.Microservice;
-import com.deadlockArena.dto.PlayerDto;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

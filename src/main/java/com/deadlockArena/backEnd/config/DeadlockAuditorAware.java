@@ -1,4 +1,4 @@
-package com.deadlockArena.config;
+package com.deadlockArena.backEnd.config;
 
 import java.util.Optional;
 

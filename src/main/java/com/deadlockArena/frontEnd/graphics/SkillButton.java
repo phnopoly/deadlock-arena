@@ -11,8 +11,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
-import com.deadlockArena.Constants;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,7 +24,7 @@ public class SkillButton extends JButton {
 	private double fraction;
 
 	public SkillButton() {
-		setBackground(Constants.DEFAULT_BACKGROUND);
+//		setBackground(Constants.DEFAULT_BACKGROUND);
 		try {
 			this.gray = ImageIO.read(new File("pics/gray.png"));
 		} catch (IOException e) {
@@ -66,8 +64,8 @@ public class SkillButton extends JButton {
 		int height = color.getHeight();
 		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = img.createGraphics();
-		Arc2D.Double expose = new Arc2D.Double(-(width / 2d), -(height / 2d), width * 2d,
-				height * 2d, 90, -(360.0d * fraction), Arc2D.PIE);
+		Arc2D.Double expose = new Arc2D.Double(-(width / 2d), -(height / 2d), width * 2d, height * 2d, 90,
+				-(360.0d * fraction), Arc2D.PIE);
 		g2d.fill(expose);
 		g2d.setComposite(AlphaComposite.SrcIn);
 		g2d.drawImage(color, 0, 0, this);

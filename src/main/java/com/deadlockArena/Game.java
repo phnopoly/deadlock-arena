@@ -32,12 +32,9 @@ public class Game {
 		this.mainFrame = new MainFrame();
 		this.mainLogic = new MainLogic();
 
-		this.selectGrid = new SelectGrid(
-				new SelectButton [ Constants.SELECT_ROW_COUNT ] [ Constants.SELECT_COL_COUNT ]);
-		this.slotGrid1 = new SlotGrid(
-				new SlotButton [ Constants.SLOT_ROW_COUNT ] [ Constants.SLOT_COL_COUNT ], "bottom");
-		this.slotGrid2 = new SlotGrid(
-				new SlotButton [ Constants.SLOT_ROW_COUNT ] [ Constants.SLOT_COL_COUNT ], "top");
+		this.selectGrid = new SelectGrid(new SelectButton[Constants.SELECT_ROW_COUNT][Constants.SELECT_COL_COUNT]);
+		this.slotGrid1 = new SlotGrid(new SlotButton[Constants.SLOT_ROW_COUNT][Constants.SLOT_COL_COUNT], "bottom");
+		this.slotGrid2 = new SlotGrid(new SlotButton[Constants.SLOT_ROW_COUNT][Constants.SLOT_COL_COUNT], "top");
 
 		this.player = 1;
 		this.totalCount = 0;
@@ -46,13 +43,13 @@ public class Game {
 	}
 
 	public void executePhase1() {
-		this.mainFrame.addPanels();
-		try {
-			this.mainFrame.addSelectButtons(this, selectGrid);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		this.mainFrame.addSlotButtons(this, slotGrid1, slotGrid2);
+//		this.mainFrame.addPanels();
+//		try {
+//			this.mainFrame.addSelectButtons(this, selectGrid);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		this.mainFrame.addSlotButtons(this, slotGrid1, slotGrid2);
 
 		this.selectGrid.addMouseListener(1);
 		this.slotGrid1.addMouseListener(1);
@@ -75,8 +72,8 @@ public class Game {
 			}
 			// mainLogic.switchListeners(slotGrid1, slotGrid2, player,
 			// mainFrame.getMessages());
-			mainFrame.clearSkillButtons(player);
-			mainFrame.clearPanelEast(player);
+//			mainFrame.clearSkillButtons(player);
+//			mainFrame.clearPanelEast(player);
 			if (currentCap < Constants.CAP_TURN) {
 				currentCap++;
 			}

@@ -12,7 +12,7 @@ import javax.sound.sampled.SourceDataLine;
 import javax.swing.JButton;
 
 import com.deadlockArena.Constants;
-import com.deadlockArena.exception.CornerCaseException;
+import com.deadlockArena.frontEnd.exception.CornerCaseException;
 
 import javafx.scene.control.Button;
 import lombok.Data;

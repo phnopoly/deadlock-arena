@@ -1,7 +1,7 @@
 package com.deadlockArena.frontEnd.logic;
 
 import com.deadlockArena.Constants;
-import com.deadlockArena.exception.CornerCaseException;
+import com.deadlockArena.frontEnd.exception.CornerCaseException;
 
 import javafx.scene.control.Button;
 import lombok.AllArgsConstructor;

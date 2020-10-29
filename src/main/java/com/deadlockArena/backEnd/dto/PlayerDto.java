@@ -1,4 +1,4 @@
-package com.deadlockArena.dto;
+package com.deadlockArena.backEnd.dto;
 
 import java.io.Serializable;
 

@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 import com.deadlockArena.Constants;
 import com.deadlockArena.Game;
-import com.deadlockArena.dto.ChampionDto;
+import com.deadlockArena.backEnd.dto.ChampionDto;
 import com.deadlockArena.frontEnd.logic.Coordinate;
 
 import javafx.scene.control.Button;
