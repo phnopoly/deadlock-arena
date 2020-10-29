@@ -12,11 +12,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class DeadlockArenaApplication implements CommandLineRunner {
+public class DeadlockArenaBackEnd implements CommandLineRunner {
 
 	private static ApplicationContext applicationContext;
 
-	public static final Logger LOG = LoggerFactory.getLogger(DeadlockArenaApplication.class);
+	public static final Logger LOG = LoggerFactory.getLogger(DeadlockArenaBackEnd.class);
 
 	@Override
 	public void run(String... arg) throws Exception {
@@ -28,7 +28,7 @@ public class DeadlockArenaApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplicationBuilder sAB = new SpringApplicationBuilder(DeadlockArenaApplication.class);
+		SpringApplicationBuilder sAB = new SpringApplicationBuilder(DeadlockArenaBackEnd.class);
 		sAB.headless(false);
 		sAB.run(args);
 
