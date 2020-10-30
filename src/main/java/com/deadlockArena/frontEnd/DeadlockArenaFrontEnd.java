@@ -1,16 +1,20 @@
 package com.deadlockArena.frontEnd;
 
+import java.util.List;
 import java.util.Stack;
 
 import com.deadlockArena.backEnd.dto.ChampionDto;
+import com.deadlockArena.backEnd.dto.PictureDto;
 import com.deadlockArena.frontEnd.graphics.CancelButton;
 import com.deadlockArena.frontEnd.graphics.MainFrame;
 import com.deadlockArena.frontEnd.graphics.SelectButton;
 import com.deadlockArena.frontEnd.graphics.SlotButton;
+import com.deadlockArena.frontEnd.integrate.ReferenceDataExtractor;
 import com.deadlockArena.frontEnd.logic.Coordinate;
 import com.deadlockArena.frontEnd.logic.MainLogic;
 import com.deadlockArena.frontEnd.logic.SelectGrid;
 import com.deadlockArena.frontEnd.logic.SlotGrid;
+import com.google.gson.reflect.TypeToken;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -31,10 +35,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class DeadlockArenaFrontEnd extends Application {
 
-	private static final String JSON_URL = "https://api.myjson.com/bins/3jwmh";
+	private static final String CHAMPIONS_URL = "http://localhost:8088/rest/allChampions";
+	private static final String PICTURES_URL = "http://localhost:8088/rest/allPictures";
 
-	//	WebResource webResource = client.resource("http://localhost:8080/UIBakerRESTJerseyServer/rest/ttocservice/")
-	//			.path(value);
+	// WebResource webResource =
+	// client.resource("http://localhost:8080/UIBakerRESTJerseyServer/rest/ttocservice/")
+	// .path(value);
 
 	private MainFrame mainFrame;
 	private MainLogic mainLogic;
@@ -89,16 +95,25 @@ public class DeadlockArenaFrontEnd extends Application {
 	private Stack<Button[]> orderList;
 	private Scene mainScene;
 
-	public static void main(final String[] args) {
+	private List<ChampionDto> championDtos;
 
-		// Game g = new Game();
-		// g.executePhase1();
-		// g.executePhase2();
+	private List<PictureDto> pictureDtos;
+
+	public static void main(final String[] args) {
 		Application.launch(args);
 	}
 
 	@Override
 	public void start(final Stage mainStage) throws Exception {
+
+		final ReferenceDataExtractor rde = new ReferenceDataExtractor();
+		this.championDtos = rde.extractData(DeadlockArenaFrontEnd.CHAMPIONS_URL, new TypeToken<List<ChampionDto>>() {
+		}.getType());
+
+		for (final ChampionDto c : this.championDtos) {
+			System.out.println(c);
+		}
+
 		this.mainLogic = new MainLogic();
 
 		this.selectGrid = new SelectGrid(new SelectButton[Constants.SELECT_ROW_COUNT][Constants.SELECT_COL_COUNT]);
@@ -119,11 +134,11 @@ public class DeadlockArenaFrontEnd extends Application {
 		mainStage.setScene(this.mainScene);
 		mainStage.show();
 
-		// primaryStage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// primaryStage.setLayout(new BorderLayout());
-		// // super.setLocationRelativeTo(null);
-		// primaryStage.pack();
-		// primaryStage.setVisible(true);
+		//		mainStage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//		mainStage.setLayout(new BorderLayout());
+		//		super.setLocationRelativeTo(null);
+		//		mainStage.pack();
+		//		mainStage.setVisible(true);
 
 		this.orderList = new Stack<>();
 
