@@ -23,8 +23,8 @@ public class Player implements Serializable {
 
 	@Id
 	@Column(name = "PLAYER_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-	@SequenceGenerator(name = "SEQ", sequenceName = "PLAYER_SEQ")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "PLAYER_SEQ")
+	@SequenceGenerator(name = "PLAYER_SEQ", sequenceName = "PLAYER_SEQ")
 	private Long playerId;
 
 	@NotNull

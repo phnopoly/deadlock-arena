@@ -21,8 +21,8 @@ public class Champion implements Serializable {
 
 	@Id
 	@Column(name = "CHAMPION_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-	@SequenceGenerator(name = "SEQ", sequenceName = "CHAMPION_SEQ")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CHAMPION_SEQ")
+	@SequenceGenerator(name = "CHAMPION_SEQ", sequenceName = "CHAMPION_SEQ")
 	protected String championId;
 
 	@Column(name = "NAME")

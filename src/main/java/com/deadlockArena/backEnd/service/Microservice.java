@@ -3,6 +3,7 @@ package com.deadlockArena.backEnd.service;
 import java.util.List;
 
 import com.deadlockArena.backEnd.dto.ChampionDto;
+import com.deadlockArena.backEnd.dto.PictureDto;
 import com.deadlockArena.backEnd.dto.PlayerDto;
 
 public interface Microservice {
@@ -14,6 +15,10 @@ public interface Microservice {
 
 	public List<PlayerDto> getAllPlayers();
 
-	public PlayerDto newPlayer(final PlayerDto playerDto);
+	public PlayerDto newPlayer(PlayerDto playerDto);
+
+	public List<PictureDto> loadAllPictures();
+
+	public PictureDto loadPicture(String fileName);
 
 }
