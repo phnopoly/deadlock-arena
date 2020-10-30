@@ -33,7 +33,6 @@ public class Uploader {
 
 	public void connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			this.conn = DriverManager.getConnection(this.url, this.username, this.password);
 			DeadlockArenaDatabase.LOG.debug("Connection success!");
 		} catch (final Exception e) {

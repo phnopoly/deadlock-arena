@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.deadlockArena.database")
+@ComponentScan(basePackages = "com.deadlockarena.database")
 public class DeadlockArenaDatabase {
 
 	public static final Logger LOG = LoggerFactory.getLogger(DeadlockArenaDatabase.class);

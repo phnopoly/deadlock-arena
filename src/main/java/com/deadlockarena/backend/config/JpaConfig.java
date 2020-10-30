@@ -12,14 +12,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Configuration targeting the JPA and transactions of database.
  *
  * @author Phong Vo
- * @version 1.0
- * @since 1.0
+ * 
  */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-@EntityScan(basePackages = "com.deadlockArena.backEnd.entity")
-@EnableJpaRepositories(basePackages = "com.deadlockArena.backEnd.repository")
+@EntityScan(basePackages = "com.deadlockarena.backend.entity")
+@EnableJpaRepositories(basePackages = "com.deadlockarena.backend.repository")
 public class JpaConfig {
 
 	/**

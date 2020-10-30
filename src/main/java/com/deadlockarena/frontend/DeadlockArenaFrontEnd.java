@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Stack;
 
 import com.deadlockarena.backend.dto.ChampionDto;
-import com.deadlockarena.backend.dto.PictureDto;
+import com.deadlockarena.backend.dto.RefPictureDto;
 import com.deadlockarena.frontend.graphics.CancelButton;
 import com.deadlockarena.frontend.graphics.MainFrame;
 import com.deadlockarena.frontend.graphics.SelectButton;
@@ -97,7 +97,7 @@ public class DeadlockArenaFrontEnd extends Application {
 
 	private List<ChampionDto> championDtos;
 
-	private List<PictureDto> pictureDtos;
+	private List<RefPictureDto> pictureDtos;
 
 	public static void main(final String[] args) {
 		Application.launch(args);

@@ -7,22 +7,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.deadlockarena.backend.entity.Champion;
+import com.deadlockarena.backend.entity.RefMusic;
 
 /**
- * Spring Data Repository for {@link Champion} entity
+ * Spring Data Repository for {@link RefMusic} entity
  *
  * @author zsaordenio
  *
  */
 @Repository
-public interface ChampionRepository
-extends JpaRepository<Champion, Long>, JpaSpecificationExecutor<Champion> {
+public interface RefMusicRepository extends JpaRepository<RefMusic, Long>, JpaSpecificationExecutor<RefMusic> {
 
 	@Override
-	List<Champion> findAll();
+	List<RefMusic> findAll();
 
-	Optional<Champion> findByChampionId(Long championId);
+	Optional<RefMusic> findByFileName(String fileName);
 
-	Optional<Champion> findByName(String name);
 }

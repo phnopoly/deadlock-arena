@@ -18,7 +18,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * This class is to allow an entity to inherit properties from it.
@@ -29,7 +28,6 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @MappedSuperclass
-@EqualsAndHashCode(of = { "version" })
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({ "createdAt" , "createdBy" , "updatedAt" , "updatedBy" })
 public abstract class BaseEntity {

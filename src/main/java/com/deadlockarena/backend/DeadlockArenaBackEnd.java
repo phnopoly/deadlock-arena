@@ -11,18 +11,22 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.deadlockArena.backEnd")
+@ComponentScan(basePackages = "com.deadlockarena.backend")
 public class DeadlockArenaBackEnd {
 
 	private static ApplicationContext applicationContext;
 
 	public static final Logger LOG = LoggerFactory.getLogger(DeadlockArenaBackEnd.class);
 
+	public static final boolean CALL_GET_ALL_BEANS = false;
+
 	public static void main(final String[] args) {
 		final SpringApplicationBuilder sAB = new SpringApplicationBuilder(DeadlockArenaBackEnd.class);
 		sAB.headless(false);
 		sAB.run(args);
-		// DeadlockArenaBackEnd.getAllBeans();
+		if (DeadlockArenaBackEnd.CALL_GET_ALL_BEANS) {
+			DeadlockArenaBackEnd.getAllBeans();
+		}
 	}
 
 	private static void getAllBeans() {

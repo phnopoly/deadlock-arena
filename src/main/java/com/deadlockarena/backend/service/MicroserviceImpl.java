@@ -10,19 +10,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.deadlockarena.backend.dto.ChampionDto;
-import com.deadlockarena.backend.dto.PictureDto;
 import com.deadlockarena.backend.dto.PlayerDto;
+import com.deadlockarena.backend.dto.RefMusicDto;
+import com.deadlockarena.backend.dto.RefPictureDto;
+import com.deadlockarena.backend.dto.RefSoundDto;
 import com.deadlockarena.backend.entity.Champion;
-import com.deadlockarena.backend.entity.Picture;
 import com.deadlockarena.backend.entity.Player;
+import com.deadlockarena.backend.entity.RefMusic;
+import com.deadlockarena.backend.entity.RefPicture;
+import com.deadlockarena.backend.entity.RefSound;
 import com.deadlockarena.backend.exception.DeadlockException;
 import com.deadlockarena.backend.mapper.ChampionMapper;
-import com.deadlockarena.backend.mapper.PictureMapper;
 import com.deadlockarena.backend.mapper.PlayerMapper;
+import com.deadlockarena.backend.mapper.RefMusicMapper;
+import com.deadlockarena.backend.mapper.RefPictureMapper;
+import com.deadlockarena.backend.mapper.RefSoundMapper;
 import com.deadlockarena.backend.repository.ChampionRepository;
-import com.deadlockarena.backend.repository.PictureRepository;
 import com.deadlockarena.backend.repository.PlayerRepository;
+import com.deadlockarena.backend.repository.RefMusicRepository;
+import com.deadlockarena.backend.repository.RefPictureRepository;
+import com.deadlockarena.backend.repository.RefSoundRepository;
 
+/**
+ * Implementation of {@link Microservice} that defines the APIs for the
+ * Reference Data.
+ *
+ * @author zsaordenio
+ *
+ */
 @Service
 @Transactional
 public class MicroserviceImpl implements Microservice {
@@ -34,13 +49,23 @@ public class MicroserviceImpl implements Microservice {
 	private PlayerRepository playerRepository;
 
 	@Autowired
-	private PictureRepository pictureRepository;
+	private RefPictureRepository refPictureRepository;
+
+	@Autowired
+	private RefSoundRepository refSoundRepository;
+
+	@Autowired
+	private RefMusicRepository refMusicRepository;
 
 	private static final ChampionMapper CHAMPION_MAPPER = Mappers.getMapper(ChampionMapper.class);
 
 	private static final PlayerMapper PLAYER_MAPPER = Mappers.getMapper(PlayerMapper.class);
 
-	private static final PictureMapper PICTURE_MAPPER = Mappers.getMapper(PictureMapper.class);
+	private static final RefPictureMapper REF_PICTURE_MAPPER = Mappers.getMapper(RefPictureMapper.class);
+
+	private static final RefSoundMapper REF_SOUND_MAPPER = Mappers.getMapper(RefSoundMapper.class);
+
+	private static final RefMusicMapper REF_MUSIC_MAPPER = Mappers.getMapper(RefMusicMapper.class);
 
 	@Override
 	public ChampionDto getChampion(String champion) {
@@ -133,13 +158,13 @@ public class MicroserviceImpl implements Microservice {
 	}
 
 	@Override
-	public List<PictureDto> loadAllPictures() {
+	public List<RefPictureDto> loadAllRefPictures() {
 		try {
-			final List<Picture> pictureList = this.pictureRepository.findAll();
-			if (!pictureList.isEmpty()) {
-				return MicroserviceImpl.PICTURE_MAPPER.entitiyToDto(pictureList);
+			final List<RefPicture> refPictureList = this.refPictureRepository.findAll();
+			if (!refPictureList.isEmpty()) {
+				return MicroserviceImpl.REF_PICTURE_MAPPER.entitiyToDto(refPictureList);
 			} else {
-				throw new DeadlockException("Cannot find any Pictures.", HttpStatus.NOT_FOUND);
+				throw new DeadlockException("Cannot find any Ref Pictures.", HttpStatus.NOT_FOUND);
 			}
 		} catch (final DeadlockException e) {
 			throw e;
@@ -149,13 +174,45 @@ public class MicroserviceImpl implements Microservice {
 	}
 
 	@Override
-	public PictureDto loadPicture(final String fileName) {
+	public RefPictureDto loadRefPicture(final String fileName) {
 		try {
-			final Optional<Picture> picture = this.pictureRepository.findByFileName(fileName);
+			final Optional<RefPicture> picture = this.refPictureRepository.findByFileName(fileName);
 			if (picture.isPresent()) {
-				return MicroserviceImpl.PICTURE_MAPPER.entitiyToDto(picture.get());
+				return MicroserviceImpl.REF_PICTURE_MAPPER.entitiyToDto(picture.get());
 			} else {
-				throw new DeadlockException("Cannot find Picture.", HttpStatus.NOT_FOUND);
+				throw new DeadlockException("Cannot find Ref Picture.", HttpStatus.NOT_FOUND);
+			}
+		} catch (final DeadlockException e) {
+			throw e;
+		} catch (final Exception e) {
+			throw new DeadlockException("Misc Err.", HttpStatus.INTERNAL_SERVER_ERROR, e);
+		}
+	}
+
+	@Override
+	public List<RefSoundDto> loadAllRefSounds() {
+		try {
+			final List<RefSound> refSoundList = this.refSoundRepository.findAll();
+			if (!refSoundList.isEmpty()) {
+				return MicroserviceImpl.REF_SOUND_MAPPER.entitiyToDto(refSoundList);
+			} else {
+				throw new DeadlockException("Cannot find any Ref Sounds.", HttpStatus.NOT_FOUND);
+			}
+		} catch (final DeadlockException e) {
+			throw e;
+		} catch (final Exception e) {
+			throw new DeadlockException("Misc Err.", HttpStatus.INTERNAL_SERVER_ERROR, e);
+		}
+	}
+
+	@Override
+	public List<RefMusicDto> loadAllRefMusic() {
+		try {
+			final List<RefMusic> refMusicList = this.refMusicRepository.findAll();
+			if (!refMusicList.isEmpty()) {
+				return MicroserviceImpl.REF_MUSIC_MAPPER.entitiyToDto(refMusicList);
+			} else {
+				throw new DeadlockException("Cannot find any Ref Musics.", HttpStatus.NOT_FOUND);
 			}
 		} catch (final DeadlockException e) {
 			throw e;

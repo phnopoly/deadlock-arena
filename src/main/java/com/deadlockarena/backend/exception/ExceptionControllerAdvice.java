@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.deadlockarena.backend.DeadlockArenaBackEnd;
 
+/**
+ * Controller Advice to handle exceptions for REST-APIs
+ *
+ * @author zsaordenio
+ *
+ */
 @ControllerAdvice
 public class ExceptionControllerAdvice {
 
@@ -14,7 +20,7 @@ public class ExceptionControllerAdvice {
 	@ResponseBody
 	ResponseEntity<ErrorResponse> onDeadlockException(final DeadlockException dle) {
 		final ErrorResponse error = new ErrorResponse(dle.getMsg());
-		String details = dle.getCause() != null ? dle.getCause().getMessage() : dle.getMessage();
+		final String details = dle.getCause() != null ? dle.getCause().getMessage() : dle.getMessage();
 		error.setErrorDetails(details);
 		DeadlockArenaBackEnd.LOG.error("dle msg: {}", dle.getMsg());
 		DeadlockArenaBackEnd.LOG.error("dle details: {}", details);

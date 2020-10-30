@@ -2,17 +2,23 @@ package com.deadlockarena.backend.dto;
 
 import java.io.Serializable;
 
+import com.deadlockarena.backend.entity.Champion;
 import com.deadlockarena.backend.entity.HpPotion;
 import com.deadlockarena.backend.entity.MpPotion;
 import com.deadlockarena.backend.entity.PotionInventory;
 import com.deadlockarena.backend.entity.StatusBox;
+import com.deadlockarena.backend.mapper.ChampionMapper;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+/**
+ * Maps to {@link Champion using {@link ChampionMapper}.
+ *
+ * @author zsaordenio
+ *
+ */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class ChampionDto extends BaseDto implements Serializable {
+public class ChampionDto implements Serializable {
 	private static final long serialVersionUID = -1463870193808259649L;
 
 	protected String name;

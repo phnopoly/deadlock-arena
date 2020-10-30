@@ -7,22 +7,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.deadlockarena.backend.entity.Champion;
+import com.deadlockarena.backend.entity.RefPicture;
 
 /**
- * Spring Data Repository for {@link Champion} entity
+ * Spring Data Repository for {@link RefPicture} entity
  *
  * @author zsaordenio
  *
  */
 @Repository
-public interface ChampionRepository
-extends JpaRepository<Champion, Long>, JpaSpecificationExecutor<Champion> {
+public interface RefPictureRepository extends JpaRepository<RefPicture, Long>, JpaSpecificationExecutor<RefPicture> {
 
 	@Override
-	List<Champion> findAll();
+	List<RefPicture> findAll();
 
-	Optional<Champion> findByChampionId(Long championId);
+	Optional<RefPicture> findByFileName(String fileName);
 
-	Optional<Champion> findByName(String name);
 }
