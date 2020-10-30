@@ -18,11 +18,15 @@ public class DeadlockArenaBackEnd {
 
 	public static final Logger LOG = LoggerFactory.getLogger(DeadlockArenaBackEnd.class);
 
+	public static final boolean CALL_GET_ALL_BEANS = false;
+
 	public static void main(final String[] args) {
 		final SpringApplicationBuilder sAB = new SpringApplicationBuilder(DeadlockArenaBackEnd.class);
 		sAB.headless(false);
 		sAB.run(args);
-		// DeadlockArenaBackEnd.getAllBeans();
+		if (DeadlockArenaBackEnd.CALL_GET_ALL_BEANS) {
+			DeadlockArenaBackEnd.getAllBeans();
+		}
 	}
 
 	private static void getAllBeans() {
