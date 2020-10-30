@@ -26,7 +26,7 @@
 - change response in annotation to dto.class for all controllers
 - add to draw.io: audacity and photoshop/paint
     
-3. developer workstation setup
+## developer workstation setup
 - install eclipse enterprise Java Devleopment Tools 3.19
 - install javafx on eclipse
 - check terminate and relaunch when launching
