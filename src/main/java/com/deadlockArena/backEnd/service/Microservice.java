@@ -3,8 +3,8 @@ package com.deadlockArena.backEnd.service;
 import java.util.List;
 
 import com.deadlockArena.backEnd.dto.ChampionDto;
-import com.deadlockArena.backEnd.dto.PictureDto;
 import com.deadlockArena.backEnd.dto.PlayerDto;
+import com.deadlockArena.backEnd.dto.RefPictureDto;
 
 /**
  * Service interface that defines the API's for reference data.
@@ -23,8 +23,8 @@ public interface Microservice {
 
 	public PlayerDto newPlayer(PlayerDto playerDto);
 
-	public List<PictureDto> loadAllPictures();
+	public List<RefPictureDto> loadAllRefPictures();
 
-	public PictureDto loadPicture(String fileName);
+	public RefPictureDto loadRefPicture(String fileName);
 
 }

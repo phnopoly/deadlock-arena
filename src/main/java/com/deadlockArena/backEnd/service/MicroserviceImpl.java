@@ -10,18 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.deadlockArena.backEnd.dto.ChampionDto;
-import com.deadlockArena.backEnd.dto.PictureDto;
 import com.deadlockArena.backEnd.dto.PlayerDto;
+import com.deadlockArena.backEnd.dto.RefPictureDto;
 import com.deadlockArena.backEnd.entity.Champion;
-import com.deadlockArena.backEnd.entity.Picture;
 import com.deadlockArena.backEnd.entity.Player;
+import com.deadlockArena.backEnd.entity.RefPicture;
 import com.deadlockArena.backEnd.exception.DeadlockException;
 import com.deadlockArena.backEnd.mapper.ChampionMapper;
-import com.deadlockArena.backEnd.mapper.PictureMapper;
 import com.deadlockArena.backEnd.mapper.PlayerMapper;
+import com.deadlockArena.backEnd.mapper.RefPictureMapper;
 import com.deadlockArena.backEnd.repository.ChampionRepository;
-import com.deadlockArena.backEnd.repository.PictureRepository;
 import com.deadlockArena.backEnd.repository.PlayerRepository;
+import com.deadlockArena.backEnd.repository.RefPictureRepository;
 
 /**
  * Implementation of {@link Microservice} that defines the APIs for the
@@ -41,13 +41,13 @@ public class MicroserviceImpl implements Microservice {
 	private PlayerRepository playerRepository;
 
 	@Autowired
-	private PictureRepository pictureRepository;
+	private RefPictureRepository pictureRepository;
 
 	private static final ChampionMapper CHAMPION_MAPPER = Mappers.getMapper(ChampionMapper.class);
 
 	private static final PlayerMapper PLAYER_MAPPER = Mappers.getMapper(PlayerMapper.class);
 
-	private static final PictureMapper PICTURE_MAPPER = Mappers.getMapper(PictureMapper.class);
+	private static final RefPictureMapper REF_PICTURE_MAPPER = Mappers.getMapper(RefPictureMapper.class);
 
 	@Override
 	public ChampionDto getChampion(String champion) {
@@ -140,13 +140,13 @@ public class MicroserviceImpl implements Microservice {
 	}
 
 	@Override
-	public List<PictureDto> loadAllPictures() {
+	public List<RefPictureDto> loadAllRefPictures() {
 		try {
-			final List<Picture> pictureList = this.pictureRepository.findAll();
-			if (!pictureList.isEmpty()) {
-				return MicroserviceImpl.PICTURE_MAPPER.entitiyToDto(pictureList);
+			final List<RefPicture> refPictureList = this.pictureRepository.findAll();
+			if (!refPictureList.isEmpty()) {
+				return MicroserviceImpl.REF_PICTURE_MAPPER.entitiyToDto(refPictureList);
 			} else {
-				throw new DeadlockException("Cannot find any Pictures.", HttpStatus.NOT_FOUND);
+				throw new DeadlockException("Cannot find any Ref Pictures.", HttpStatus.NOT_FOUND);
 			}
 		} catch (final DeadlockException e) {
 			throw e;
@@ -156,13 +156,13 @@ public class MicroserviceImpl implements Microservice {
 	}
 
 	@Override
-	public PictureDto loadPicture(final String fileName) {
+	public RefPictureDto loadRefPicture(final String fileName) {
 		try {
-			final Optional<Picture> picture = this.pictureRepository.findByFileName(fileName);
+			final Optional<RefPicture> picture = this.pictureRepository.findByFileName(fileName);
 			if (picture.isPresent()) {
-				return MicroserviceImpl.PICTURE_MAPPER.entitiyToDto(picture.get());
+				return MicroserviceImpl.REF_PICTURE_MAPPER.entitiyToDto(picture.get());
 			} else {
-				throw new DeadlockException("Cannot find Picture.", HttpStatus.NOT_FOUND);
+				throw new DeadlockException("Cannot find Ref Picture.", HttpStatus.NOT_FOUND);
 			}
 		} catch (final DeadlockException e) {
 			throw e;

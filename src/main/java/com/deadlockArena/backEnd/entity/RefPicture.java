@@ -14,13 +14,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.deadlockArena.backEnd.dto.PictureDto;
-import com.deadlockArena.backEnd.mapper.PictureMapper;
+import com.deadlockArena.backEnd.dto.RefPictureDto;
+import com.deadlockArena.backEnd.mapper.RefPictureMapper;
 
 import lombok.Data;
 
 /**
- * Maps to {@link PictureDto} using {@link PictureMapper}.
+ * Maps to {@link RefPictureDto} using {@link RefPictureMapper}.
  *
  * @author zsaordenio
  *
@@ -28,14 +28,14 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "PICTURE", schema = "deadlock")
-public class Picture implements Serializable{
+public class RefPicture implements Serializable{
 	private static final long serialVersionUID = -5208391162261595014L;
 
 	@Id
 	@Column(name = "PICTURE_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "PICTURE_SEQ")
 	@SequenceGenerator(name = "PICTURE_SEQ", sequenceName = "PICTURE")
-	private Long pictureId;
+	private Long refPctureId;
 
 	@NotNull
 	@Column(name = "FILE_NAME")
