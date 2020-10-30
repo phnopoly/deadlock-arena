@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.deadlockArena.backEnd.dto.ChampionDto;
 import com.deadlockArena.backEnd.dto.PlayerDto;
+import com.deadlockArena.backEnd.dto.RefMusicDto;
 import com.deadlockArena.backEnd.dto.RefPictureDto;
 import com.deadlockArena.backEnd.dto.RefSoundDto;
 
@@ -29,5 +30,7 @@ public interface Microservice {
 	public RefPictureDto loadRefPicture(String fileName);
 
 	public List<RefSoundDto> loadAllRefSounds();
+
+	public List<RefMusicDto> loadAllRefMusic();
 
 }

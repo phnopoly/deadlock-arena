@@ -11,19 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.deadlockArena.backEnd.dto.ChampionDto;
 import com.deadlockArena.backEnd.dto.PlayerDto;
+import com.deadlockArena.backEnd.dto.RefMusicDto;
 import com.deadlockArena.backEnd.dto.RefPictureDto;
 import com.deadlockArena.backEnd.dto.RefSoundDto;
 import com.deadlockArena.backEnd.entity.Champion;
 import com.deadlockArena.backEnd.entity.Player;
+import com.deadlockArena.backEnd.entity.RefMusic;
 import com.deadlockArena.backEnd.entity.RefPicture;
 import com.deadlockArena.backEnd.entity.RefSound;
 import com.deadlockArena.backEnd.exception.DeadlockException;
 import com.deadlockArena.backEnd.mapper.ChampionMapper;
 import com.deadlockArena.backEnd.mapper.PlayerMapper;
+import com.deadlockArena.backEnd.mapper.RefMusicMapper;
 import com.deadlockArena.backEnd.mapper.RefPictureMapper;
 import com.deadlockArena.backEnd.mapper.RefSoundMapper;
 import com.deadlockArena.backEnd.repository.ChampionRepository;
 import com.deadlockArena.backEnd.repository.PlayerRepository;
+import com.deadlockArena.backEnd.repository.RefMusicRepository;
 import com.deadlockArena.backEnd.repository.RefPictureRepository;
 import com.deadlockArena.backEnd.repository.RefSoundRepository;
 
@@ -45,10 +49,13 @@ public class MicroserviceImpl implements Microservice {
 	private PlayerRepository playerRepository;
 
 	@Autowired
-	private RefPictureRepository pictureRepository;
+	private RefPictureRepository refPictureRepository;
 
 	@Autowired
-	private RefSoundRepository soundRepository;
+	private RefSoundRepository refSoundRepository;
+
+	@Autowired
+	private RefMusicRepository refMusicRepository;
 
 	private static final ChampionMapper CHAMPION_MAPPER = Mappers.getMapper(ChampionMapper.class);
 
@@ -57,6 +64,8 @@ public class MicroserviceImpl implements Microservice {
 	private static final RefPictureMapper REF_PICTURE_MAPPER = Mappers.getMapper(RefPictureMapper.class);
 
 	private static final RefSoundMapper REF_SOUND_MAPPER = Mappers.getMapper(RefSoundMapper.class);
+
+	private static final RefMusicMapper REF_MUSIC_MAPPER = Mappers.getMapper(RefMusicMapper.class);
 
 	@Override
 	public ChampionDto getChampion(String champion) {
@@ -151,7 +160,7 @@ public class MicroserviceImpl implements Microservice {
 	@Override
 	public List<RefPictureDto> loadAllRefPictures() {
 		try {
-			final List<RefPicture> refPictureList = this.pictureRepository.findAll();
+			final List<RefPicture> refPictureList = this.refPictureRepository.findAll();
 			if (!refPictureList.isEmpty()) {
 				return MicroserviceImpl.REF_PICTURE_MAPPER.entitiyToDto(refPictureList);
 			} else {
@@ -167,7 +176,7 @@ public class MicroserviceImpl implements Microservice {
 	@Override
 	public RefPictureDto loadRefPicture(final String fileName) {
 		try {
-			final Optional<RefPicture> picture = this.pictureRepository.findByFileName(fileName);
+			final Optional<RefPicture> picture = this.refPictureRepository.findByFileName(fileName);
 			if (picture.isPresent()) {
 				return MicroserviceImpl.REF_PICTURE_MAPPER.entitiyToDto(picture.get());
 			} else {
@@ -183,11 +192,27 @@ public class MicroserviceImpl implements Microservice {
 	@Override
 	public List<RefSoundDto> loadAllRefSounds() {
 		try {
-			final List<RefSound> refSoundList = this.soundRepository.findAll();
+			final List<RefSound> refSoundList = this.refSoundRepository.findAll();
 			if (!refSoundList.isEmpty()) {
 				return MicroserviceImpl.REF_SOUND_MAPPER.entitiyToDto(refSoundList);
 			} else {
 				throw new DeadlockException("Cannot find any Ref Sounds.", HttpStatus.NOT_FOUND);
+			}
+		} catch (final DeadlockException e) {
+			throw e;
+		} catch (final Exception e) {
+			throw new DeadlockException("Misc Err.", HttpStatus.INTERNAL_SERVER_ERROR, e);
+		}
+	}
+
+	@Override
+	public List<RefMusicDto> loadAllRefMusic() {
+		try {
+			final List<RefMusic> refMusicList = this.refMusicRepository.findAll();
+			if (!refMusicList.isEmpty()) {
+				return MicroserviceImpl.REF_MUSIC_MAPPER.entitiyToDto(refMusicList);
+			} else {
+				throw new DeadlockException("Cannot find any Ref Musics.", HttpStatus.NOT_FOUND);
 			}
 		} catch (final DeadlockException e) {
 			throw e;
