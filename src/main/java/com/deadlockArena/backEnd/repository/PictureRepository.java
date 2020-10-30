@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import com.deadlockArena.backEnd.entity.Picture;
 
+/**
+ * Spring Data Repository for {@link Picture} entity
+ *
+ * @author zsaordenio
+ *
+ */
 @Repository
 public interface PictureRepository extends JpaRepository<Picture, Long>, JpaSpecificationExecutor<Picture> {
 
