@@ -20,6 +20,8 @@ public class PictureDto implements Serializable{
 	private Long pictureId;
 
 	private String fileName;
+
+	private byte[] contents;
 }
 
 

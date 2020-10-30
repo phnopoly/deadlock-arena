@@ -24,7 +24,8 @@ public class ReferenceDataExtractor {
 	public <T> List<T> establishConnection(final HttpURLConnection reqConn, final Type t)
 			throws IOException {
 		reqConn.connect();
-		final JsonElement element = JsonParser.parseReader(new InputStreamReader(reqConn.getInputStream()));
+		final JsonParser jp = new JsonParser();
+		final JsonElement element = jp.parse(new InputStreamReader(reqConn.getInputStream()));
 		final List<T> dtos = new Gson().fromJson(element, t);
 		reqConn.disconnect();
 		return dtos;

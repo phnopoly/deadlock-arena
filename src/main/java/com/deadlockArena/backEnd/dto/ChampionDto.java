@@ -10,7 +10,6 @@ import com.deadlockArena.backEnd.entity.StatusBox;
 import com.deadlockArena.backEnd.mapper.ChampionMapper;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * Maps to {@link Champion using {@link ChampionMapper}.
@@ -19,8 +18,7 @@ import lombok.EqualsAndHashCode;
  *
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class ChampionDto extends BaseDto implements Serializable {
+public class ChampionDto implements Serializable {
 	private static final long serialVersionUID = -1463870193808259649L;
 
 	protected String name;
