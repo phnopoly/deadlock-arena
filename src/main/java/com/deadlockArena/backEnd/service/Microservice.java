@@ -5,6 +5,7 @@ import java.util.List;
 import com.deadlockArena.backEnd.dto.ChampionDto;
 import com.deadlockArena.backEnd.dto.PlayerDto;
 import com.deadlockArena.backEnd.dto.RefPictureDto;
+import com.deadlockArena.backEnd.dto.RefSoundDto;
 
 /**
  * Service interface that defines the API's for reference data.
@@ -26,5 +27,7 @@ public interface Microservice {
 	public List<RefPictureDto> loadAllRefPictures();
 
 	public RefPictureDto loadRefPicture(String fileName);
+
+	public List<RefSoundDto> loadAllRefSounds();
 
 }

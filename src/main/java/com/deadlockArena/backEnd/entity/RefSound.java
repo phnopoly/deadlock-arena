@@ -14,28 +14,28 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.deadlockArena.backEnd.dto.RefPictureDto;
-import com.deadlockArena.backEnd.mapper.RefPictureMapper;
+import com.deadlockArena.backEnd.dto.RefSoundDto;
+import com.deadlockArena.backEnd.mapper.RefSoundMapper;
 
 import lombok.Data;
 
 /**
- * Maps to {@link RefPictureDto} using {@link RefPictureMapper}.
+ * Maps to {@link RefSoundDto} using {@link RefSoundMapper}.
  *
  * @author zsaordenio
  *
  */
 @Data
 @Entity
-@Table(name = "PICTURE", schema = "deadlock")
-public class RefPicture implements Serializable{
-	private static final long serialVersionUID = -5208391162261595014L;
+@Table(name = "SOUND", schema = "deadlock")
+public class RefSound implements Serializable {
+	private static final long serialVersionUID = -500546788373195054L;
 
 	@Id
-	@Column(name = "PICTURE_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "PICTURE_SEQ")
-	@SequenceGenerator(name = "PICTURE_SEQ", sequenceName = "PICTURE")
-	private Long refPictureId;
+	@Column(name = "SOUND_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SOUND_SEQ")
+	@SequenceGenerator(name = "SOUND_SEQ", sequenceName = "SOUND")
+	private Long refSoundId;
 
 	@NotNull
 	@Column(name = "FILE_NAME")
@@ -47,5 +47,4 @@ public class RefPicture implements Serializable{
 	@Column(name = "CONTENTS")
 	private byte[] contents;
 }
-
 
