@@ -11,8 +11,17 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.deadlockArena.backEnd.dto.ChampionDto;
+import com.deadlockArena.backEnd.mapper.ChampionMapper;
+
 import lombok.Data;
 
+/**
+ * Maps to {@link ChampionDto} using {@link ChampionMapper}.
+ *
+ * @author zsaordenio
+ *
+ */
 @Data
 @Entity
 @Table(name = "CHAMPION", schema = "deadlock")

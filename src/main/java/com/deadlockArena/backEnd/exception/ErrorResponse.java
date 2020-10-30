@@ -5,6 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Response object returned when there are any types of errors while processing
+ * REST-API method
+ *
+ * @author zsaordenio
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

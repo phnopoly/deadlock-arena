@@ -2,8 +2,16 @@ package com.deadlockArena.backEnd.exception;
 
 import org.springframework.http.HttpStatus;
 
+import com.deadlockArena.backEnd.service.Microservice;
+
 import lombok.Getter;
 
+/**
+ * Generic exception thrown in {@link Microservice}.
+ *
+ * @author zsaordenio
+ *
+ */
 @Getter
 public class DeadlockException extends RuntimeException {
 

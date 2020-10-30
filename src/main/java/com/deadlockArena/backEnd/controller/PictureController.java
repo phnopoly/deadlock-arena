@@ -14,6 +14,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * Provides REST-API information for Picture model show in SwaggerUI.
+ *
+ * @author zsaordenio
+ *
+ */
 @RestController
 @RequestMapping("/rest")
 public class PictureController {

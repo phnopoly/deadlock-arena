@@ -16,6 +16,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * Provides REST-API information for Champion model show in SwaggerUI.
+ *
+ * @author zsaordenio
+ *
+ */
 @RestController
 @RequestMapping("/rest")
 public class ChampionController {
@@ -27,8 +33,8 @@ public class ChampionController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved Champion.") ,
 			@ApiResponse(code = 404, message = "Champion does not exsit.") })
 	@GetMapping("/champion")
-	public ChampionDto getChampion(@RequestParam String champion) {
-		return microservice.getChampion(champion);
+	public ChampionDto getChampion(@RequestParam final String champion) {
+		return this.microservice.getChampion(champion);
 	}
 
 	@ApiOperation(value = "Get all Champions.", response = Champion.class, responseContainer = "List")
@@ -37,7 +43,7 @@ public class ChampionController {
 			@ApiResponse(code = 404, message = "Champions do not exist.") })
 	@GetMapping("/allChampions")
 	public List<ChampionDto> getAllChampions() {
-		return microservice.getAllChampions();
+		return this.microservice.getAllChampions();
 	}
 
 }

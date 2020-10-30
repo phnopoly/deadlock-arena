@@ -9,10 +9,17 @@ import org.springframework.stereotype.Repository;
 
 import com.deadlockArena.backEnd.entity.Champion;
 
+/**
+ * Spring Data Repository for {@link Champion} entity
+ *
+ * @author zsaordenio
+ *
+ */
 @Repository
 public interface ChampionRepository
-		extends JpaRepository<Champion, Long>, JpaSpecificationExecutor<Champion> {
+extends JpaRepository<Champion, Long>, JpaSpecificationExecutor<Champion> {
 
+	@Override
 	List<Champion> findAll();
 
 	Optional<Champion> findByChampionId(Long championId);

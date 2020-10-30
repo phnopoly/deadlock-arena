@@ -13,8 +13,17 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.deadlockArena.backEnd.dto.PlayerDto;
+import com.deadlockArena.backEnd.mapper.PlayerMapper;
+
 import lombok.Data;
 
+/**
+ * Maps to {@link PlayerDto} using {@link PlayerMapper}.
+ *
+ * @author zsaordenio
+ *
+ */
 @Data
 @Entity
 @Table(name = "PLAYER", schema = "deadlock")

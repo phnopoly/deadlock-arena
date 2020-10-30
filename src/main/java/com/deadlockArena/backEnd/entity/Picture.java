@@ -14,8 +14,17 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.deadlockArena.backEnd.dto.PictureDto;
+import com.deadlockArena.backEnd.mapper.PictureMapper;
+
 import lombok.Data;
 
+/**
+ * Maps to {@link PictureDto} using {@link PictureMapper}.
+ *
+ * @author zsaordenio
+ *
+ */
 @Data
 @Entity
 @Table(name = "PICTURE", schema = "deadlock")

@@ -7,6 +7,13 @@ import org.mapstruct.Mapper;
 import com.deadlockArena.backEnd.dto.ChampionDto;
 import com.deadlockArena.backEnd.entity.Champion;
 
+/**
+ * Maps {@link Champion} to and from {@link ChampionDto}. Mapper Implementation
+ * is generated on build.
+ *
+ * @author zsaordenio
+ *
+ */
 @Mapper(componentModel = "spring")
 public interface ChampionMapper {
 

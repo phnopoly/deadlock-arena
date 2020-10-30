@@ -17,6 +17,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * Provides REST-API information for Player model show in SwaggerUI.
+ *
+ * @author zsaordenio
+ *
+ */
 @RestController
 @RequestMapping("/rest")
 public class PlayerController {
@@ -28,8 +34,8 @@ public class PlayerController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully logged in.") ,
 			@ApiResponse(code = 404, message = "Username and Password are not found.") })
 	@GetMapping("/login")
-	public PlayerDto getPlayerForLogin(String username, String password) {
-		return microservice.getPlayerForLogin(username, password);
+	public PlayerDto getPlayerForLogin(final String username, final String password) {
+		return this.microservice.getPlayerForLogin(username, password);
 	}
 
 	@ApiOperation(value = "Get all Players.", response = Player.class, responseContainer = "List")
@@ -38,14 +44,14 @@ public class PlayerController {
 			@ApiResponse(code = 404, message = "No players are present.") })
 	@GetMapping("/allPlayers")
 	public List<PlayerDto> getAllPlayers() {
-		return microservice.getAllPlayers();
+		return this.microservice.getAllPlayers();
 	}
 
 	@ApiOperation(value = "Create a new Player.", response = Player.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully created Player.") ,
 			@ApiResponse(code = 400, message = "Username already exsits.") })
 	@PostMapping("/player")
-	public PlayerDto newPlayer(@RequestBody PlayerDto playerDto) {
-		return microservice.newPlayer(playerDto);
+	public PlayerDto newPlayer(@RequestBody final PlayerDto playerDto) {
+		return this.microservice.newPlayer(playerDto);
 	}
 }

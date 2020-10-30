@@ -23,6 +23,13 @@ import com.deadlockArena.backEnd.repository.ChampionRepository;
 import com.deadlockArena.backEnd.repository.PictureRepository;
 import com.deadlockArena.backEnd.repository.PlayerRepository;
 
+/**
+ * Implementation of {@link Microservice} that defines the APIs for the
+ * Reference Data.
+ *
+ * @author zsaordenio
+ *
+ */
 @Service
 @Transactional
 public class MicroserviceImpl implements Microservice {

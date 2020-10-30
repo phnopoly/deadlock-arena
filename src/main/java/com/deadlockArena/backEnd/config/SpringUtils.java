@@ -5,6 +5,12 @@ import org.springframework.stereotype.Component;
 
 import com.deadlockArena.backEnd.service.Microservice;
 
+/**
+ * A collection of utilities used for the spring framework.
+ *
+ * @author zsaordenio
+ *
+ */
 @Component
 public class SpringUtils {
 

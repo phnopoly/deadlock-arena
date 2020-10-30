@@ -9,10 +9,17 @@ import org.springframework.stereotype.Repository;
 
 import com.deadlockArena.backEnd.entity.Player;
 
+/**
+ * Spring Data Repository for {@link Player} entity
+ *
+ * @author zsaordenio
+ *
+ */
 @Repository
 public interface PlayerRepository
-		extends JpaRepository<Player, Long>, JpaSpecificationExecutor<Player> {
+extends JpaRepository<Player, Long>, JpaSpecificationExecutor<Player> {
 
+	@Override
 	List<Player> findAll();
 
 	Optional<Player> findByUsername(String username);

@@ -6,6 +6,12 @@ import com.deadlockArena.backEnd.dto.ChampionDto;
 import com.deadlockArena.backEnd.dto.PictureDto;
 import com.deadlockArena.backEnd.dto.PlayerDto;
 
+/**
+ * Service interface that defines the API's for reference data.
+ *
+ * @author zsaordenio
+ *
+ */
 public interface Microservice {
 	public ChampionDto getChampion(String champion);
 
